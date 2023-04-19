@@ -32,10 +32,7 @@ Workshop for installing Digital.ai Release and Digital.ai Deploy on a Kubernetes
 
 ### General remarks
 
-* We will use the Slack channel [#xl-kube-workshop](https://digitalai.slack.com/archives/C0491D8G9MK) for communication
 * `xl something --help` is your friend! For example: `xl kube install --help`
-* Passwords are not in this repo. Ask workshop teachers for the needed credentials.
-
 
 ### [Part 0](./part-0/lab-0-setup-kubectl-context.md)
 
