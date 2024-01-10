@@ -10,13 +10,13 @@ Connect to Slack channel `#xl-kube-workshop`
 Check all prerequisites:
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- [xl-cli 22.3.2](https://dist.xebialabs.com/public/xl-cli/22.3.2/)
-  - [Install the XL CLI](https://docs.digital.ai/bundle/devops-release-version-v.22.3/page/release/how-to/install-the-xl-cli.html)
+- [xl-cli 24.1.0](https://dist.xebialabs.com/public/xl-cli/24.1.0/)
+  - [Install the XL CLI](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/how-to/install-the-xl-cli.html)
 - [yq](https://github.com/mikefarah/yq)
-- Java 11 - keytool (only if you plan to use the generation of the keystore inside the xl-cli kube)
+- Java 17 - keytool (only if you plan to use the generation of the keystore inside the xl-cli kube)
 - A directory from where you will run `xl kube` commands
-- License files for Release and Deploy (it will be provided on the Slack channel `#xl-kube-workshop`)
-- Username/password for Identity Server (it will be provided on the Slack channel `#xl-kube-workshop`) 
+- License files for Release and Deploy (can be generated during installation)
+- Username/password for Identity Server (it will be provided on the Slack channel `#xl-kube-workshop`)
 
 Use one of the following options to get the kubectl context on your machine:
 
@@ -40,7 +40,7 @@ az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --o
 Run:
 
 ```shell
-minikube start --driver=virtualbox --memory 22000 --cpus 8 --disk-size 60000mb
+minikube start --driver=docker --memory 22000 --cpus 8 --disk-size 60000mb
 minikube addons enable ingress
 minikube addons enable ingress-dns
 ```
@@ -89,15 +89,14 @@ For example, it will return for minikube:
 
 ```text
 $ kubectl version
-WARNING: This version information is deprecated and will be replaced with the output from kubectl version --short.  Use --output=yaml|json to get the full version.
-Client Version: version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.2", GitCommit:"5835544ca568b757a8ecae5c153f317e5736700e", GitTreeState:"clean", BuildDate:"2022-09-21T14:33:49Z", GoVersion:"go1.19.1", Compiler:"gc", Platform:"linux/amd64"}
-Kustomize Version: v4.5.7
-Server Version: version.Info{Major:"1", Minor:"25", GitVersion:"v1.25.2", GitCommit:"5835544ca568b757a8ecae5c153f317e5736700e", GitTreeState:"clean", BuildDate:"2022-09-21T14:27:13Z", GoVersion:"go1.19.1", Compiler:"gc", Platform:"linux/amd64"}
+Client Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.2", GitCommit:"7f6f68fdabc4df88cfea2dcf9a19b2b830f1e647", GitTreeState:"clean", BuildDate:"2023-05-17T14:20:07Z", GoVersion:"go1.20.4", Compiler:"gc", Platform:"darwin/amd64"}
+Kustomize Version: v5.0.1
+Server Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.4", GitCommit:"fa3d7990104d7c1f16943a67f11b154b71f6a132", GitTreeState:"clean", BuildDate:"2023-07-19T12:14:49Z", GoVersion:"go1.20.6", Compiler:"gc", Platform:"linux/amd64"}
 ```
 
 ## Check `xl` command
 
-The `xl`command version 22.3.2 should be in the path. Check this with the following command:
+The `xl`command version 24.1.0 should be in the path. Check this with the following command:
 
 ```shell
 xl version
@@ -107,14 +106,14 @@ Example of the response on linux:
 
 ```text
 $ xl version
-CLI version:             22.3.2
-Git version:             v22.3.1-3-gf1e275f
-API version XL Deploy:   xl-deploy/v1
-API version XL Release:  xl-release/v1
-Git commit:              f1e275f548795ee0624d2add34376053c09effe5
-Build date:              2022-10-27T12:58:14.038Z
-GO version:              go1.16
-OS/Arch:                 linux/amd64
+CLI version:             24.1.0-1226.113
+Git version:             v24.1.0-1221.113-0-gc0a91cd-dirty
+Deploy API version:      xl-deploy/v1
+Release API version:     xl-release/v1
+Git commit:              c0a91cd72f97c4696ab016c085225e7bd63a6eca
+Build date:              2023-12-26T03:36:21.262Z
+GO version:              go1.21.4
+OS/Arch:                 darwin/amd64
 ```
 
 ## Monitor Kubernetes
