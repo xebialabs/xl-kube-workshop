@@ -1,7 +1,7 @@
 
-# Lab 2 - Upgrade Release 22.3.1
+# Lab 2 - Upgrade Release 24.1.0
 
-In this lab we will upgrade the previous installation to  Digital.ai Release 22.3.1.
+In this lab we will upgrade the previous installation to Digital.ai Release 24.1.0.
 
 Just start upgrade process by running:
 
@@ -20,46 +20,33 @@ xl kube upgrade --skip-prompts
 
 * We are upgrading from Operator to Operator. Note: the `xl kube upgrade` command can be used to upgrade helm-based installations from 10.2 and higher XXX Check this value 
 
-For the other questions and answers details check [Upgrade Wizard for Digital.ai Release](https://docs.digital.ai/bundle/devops-release-version-v.22.3/page/release/operator/xl-op-upgrade-wizard-release.html)
+For the other questions and answers details check [Upgrade Wizard for Digital.ai Release](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/operator/xl-op-upgrade-wizard-release.html)
 
 
 Here is example of the upgrade answers, based on Azure:
 
 ```text
 $ xl kube upgrade --skip-prompts
-? Following kubectl context will be used during execution: `xl-kube-workshop`? 
-» Yes
-? Select the Kubernetes setup where the Digital.ai Devops Platform will be installed, updated or cleaned:
-»⚠️ AzureAKS [Azure AKS]
-? Do you want to use an custom Kubernetes namespace (current default is 'digitalai'):
-»⚠️ Yes
-? Enter the name of the Kubernetes namespace where the Digital.ai DevOps Platform will be installed, updated or cleaned:
-»⚠️ ns-yourname
-? Product server you want to perform upgrade for:
-» dai-release [Digital.ai Release]
-? Select the type of upgrade you want:
-» operatorToOperator [Operator to Operator]
-? Enter the repository name (eg: <repositoryName> from <repositoryName>/<imageName>:<tagName>):
-» xebialabs
-? Enter the image name (eg: <imageName> from <repositoryName>/<imageName>:<tagName>):
-» xl-release
-? Enter the image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>):
-» 22.3.1
-? Type of the OIDC configuration:
-» no-oidc [No OIDC Configuration]
-? Enter the operator image to use (eg: <repositoryName>/<imageName>:<tagName>):
-» xebialabs/release-operator:22.3.1
-? Enter the name of custom resource definition you want to reuse or replace:
-» digitalaireleases.xlr.digital.ai
-? Should CRD be reused, if No we will delete the CRD digitalaireleases.xlr.digital.ai, and all related CRs will be deleted with it:
-»⚠️ Yes
-? Enter the name of custom resource:
-» dai-xlr-ns-yourname
-? Edit list of custom resource keys that will migrate to the new Release CR: 
-»⚠️ Add: 
+
+⚠️? Select the Kubernetes setup where the Digital.ai Devops Platform will be installed, updated or cleaned: PlainK8s [Plain multi-node K8s cluster]
+⚠️? Do you want to use an custom Kubernetes namespace (current default is 'digitalai'): Yes
+⚠️? Enter the name of the Kubernetes namespace where the Digital.ai DevOps Platform will be installed, updated or cleaned: ns-yourname
+? Product server you want to perform upgrade for: dai-release [Digital.ai Release with optional Remote Runner]
+? Select the type of upgrade you want: operatorToOperator [Operator to Operator]
+? Select type of image registry: default [Default (Uses various public image registries for the installation images)]
+? Enter the repository name for the application and operator images (eg: <repositoryName> from <repositoryName>/<imageName>:<tagName>): xebialabsunsupported
+? Enter the Release image name (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): xl-release
+⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.1.0-1226.113
+? Type of the OIDC configuration: no-oidc [No OIDC Configuration]
+? Enter the operator image to use (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): release-operator
+⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.1.0-1226.113
+? Enter the name of custom resource definition you want to reuse or replace: digitalaireleases.xlr.digital.ai
+⚠️? Should CRD be reused, if No we will delete the CRD digitalaireleases.xlr.digital.ai, and all related CRs will be deleted with it: Yes
+? Enter the name of custom resource: dai-xlr-ns-yourname
+? Edit list of custom resource keys that will migrate to the new Release CR: <Received>
+⚠️ Add: 
 .spec.nginx-ingress-controller.service.annotations
-? Should we preserve persisted volume claims? If not all volume data will be lost: 
-» Yes
+? Should we preserve persisted volume claims? If not all volume data will be lost: Yes
 	 -------------------------------- ----------------------------------------------------
 	| LABEL                          | VALUE                                              |
 	 -------------------------------- ----------------------------------------------------
@@ -68,67 +55,84 @@ $ xl kube upgrade --skip-prompts
 	| CrdName                        | digitalaireleases.xlr.digital.ai                   |
 	| CreateNamespace                | true                                               |
 	| ExternalOidcConf               | external: false                                    |
-	| GenerationDateTime             | 20221031-152355                                    |
+	| GenerationDateTime             | 20240108-114406                                    |
 	| ImageNameRelease               | xl-release                                         |
-	| ImageTag                       | 22.3.1                                             |
+	| ImageRegistryType              | default                                            |
+	| ImageTag                       | 24.1.0-1226.113                                    |
 	| IngressType                    | nginx                                              |
+	| IngressTypeGeneric             | nginx                                              |
+	| IngressTypeOpenshift           | route                                              |
 	| IsCrdReused                    | true                                               |
-	| K8sSetup                       | AzureAKS                                           |
+	| IsCustomImageRegistry          | false                                              |
+	| IsRemoteRunnerTruststoreEnab.. | false                                              |
+	| K8sSetup                       | PlainK8s                                           |
 	| Namespace                      | ns-yourname                                        |
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeUpgrade          | no-oidc                                            |
-	| OperatorImageReleaseGeneric    | xebialabs/release-operator:22.3.1                  |
+	| OperatorImageRelease           | release-operator                                   |
+	| OperatorImageTag               | 24.1.0-1226.113                                    |
 	| OsType                         | darwin                                             |
-	| PreserveCrValuesRelease        | .metadata.name\n.spec.AdminPassword\n.spec.repli.. |
+	| PreserveCrValuesRelease        | .metadata.name: .\n.spec.persistence.storageClas.. |
 	| PreservePvc                    | true                                               |
 	| ProcessType                    | upgrade                                            |
-	| RepositoryName                 | xebialabs                                          |
+	| RemoteRunnerGeneration         | false                                              |
+	| RemoteRunnerInstall            | false                                              |
+	| RemoteRunnerInstallConfirm     | false                                              |
+	| RemoteRunnerReleaseName        | remote-runner                                      |
+	| RemoteRunnerUseDefaultLocation | true                                               |
+	| RepositoryName                 | xebialabsunsupported                               |
 	| ServerType                     | dai-release                                        |
 	| ShortServerName                | xlr                                                |
 	| UpgradeType                    | operatorToOperator                                 |
 	| UseCustomNamespace             | true                                               |
 	 -------------------------------- ----------------------------------------------------
-? Do you want to proceed to the deployment with these values? 
-» Yes
-For current process files will be generated in the: digitalai/dai-release/ns-yourname/20221031-152355/kubernetes
-Generated answers file successfully: digitalai/generated_answers_dai-release_ns-yourname_upgrade-20221031-152355.yaml
+For current process files will be generated in the: digitalai/dai-release/ns-yourname/20240108-111630/kubernetes
+Generated answers file successfully: digitalai/generated_answers_dai-release_ns-yourname_upgrade-20240108-111630.yaml 
 Starting upgrade processing
-Generated files successfully for operatorToOperator upgrade for AzureAKS.
+Fetching values from cluster... -Upgrading from old version 23.3.2
+Generated files successfully for operatorToOperator upgrade for PlainK8s.
 CRD creation will be skipped, expecting to have CRD already on cluster
 Cleaning the resources on the cluster!
 CR dai-xlr-ns-yourname is available, deleting
 Deleted digitalaireleases.xlr.digital.ai/dai-xlr-ns-yourname from namespace ns-yourname
 Deleting statefulsets
-Deleted sts/dai-xlr-ns-yourname-digitalai-release from namespace ns-yourname (already deleted)
+Deleted sts/dai-xlr-ns-yourname-digitalai-release from namespace ns-yourname
+Deleted sts/dai-xlr-ns-yourname-postgresql from namespace ns-yourname (already deleted)
+Deleted sts/dai-xlr-ns-yourname-rabbitmq from namespace ns-yourname
 Deleting deployments
 Deleted deployment/xlr-operator-controller-manager from namespace ns-yourname
 Deleting jobs
 Deleting services
 Deleted svc/xlr-operator-controller-manager-metrics-service from namespace ns-yourname
 Deleting secrets
-Deleted secret/sh.helm.release.v1.dai-xlr-ns-yourname.v2 from namespace ns-yourname
+Deleted secret/sh.helm.release.v1.dai-xlr-ns-yourname.v1 from namespace ns-yourname
+Deleting configmaps
+Deleted configmap/xlr-operator-controller-manager from namespace ns-yourname
 Deleted ingressclass/nginx-dai-xlr-ns-yourname from namespace ns-yourname
 Deleting roles
-Deleted role/xlr-operator-leader-election-role from namespace ns-yourname
+Deleted role/xlr-operator-leader-election from namespace ns-yourname
+Deleted role/xlr-operator-manager from namespace ns-yourname
+Deleted role/xlr-operator-proxy from namespace ns-yourname
 Deleted clusterrole/dai-xlr-ns-yourname-nginx-ingress-controller from namespace ns-yourname
-Deleted clusterrole/release-ns-yourname-operator-manager-role from namespace ns-yourname
-Deleted clusterrole/release-ns-yourname-operator-metrics-reader from namespace ns-yourname
-Deleted clusterrole/release-ns-yourname-operator-proxy-role from namespace ns-yourname
-Deleted rolebinding/xlr-operator-leader-election-rolebinding from namespace ns-yourname
+Deleted clusterrole/ns-yourname-xlr-operator-manager from namespace ns-yourname
+Deleted rolebinding/xlr-operator-leader-election from namespace ns-yourname
+Deleted rolebinding/xlr-operator-manager from namespace ns-yourname
+Deleted rolebinding/xlr-operator-proxy from namespace ns-yourname
 Deleted clusterrolebinding/dai-xlr-ns-yourname-nginx-ingress-controller from namespace ns-yourname
-Deleted clusterrolebinding/release-ns-yourname-operator-manager-rolebinding from namespace ns-yourname
-Deleted clusterrolebinding/release-ns-yourname-operator-proxy-rolebinding from namespace ns-yourname
+Deleted clusterrolebinding/ns-yourname-xlr-operator-manager from namespace ns-yourname
+Patch PVCs
 Applying resources to the cluster!
-Applied resource clusterrole/release-ns-yourname-operator-proxy-role from the file digitalai/dai-release/ns-yourname/20221031-152355/kubernetes/template/cluster-role-digital-proxy-role.yaml
-Applied resource clusterrole/release-ns-yourname-operator-manager-role from the file digitalai/dai-release/ns-yourname/20221031-152355/kubernetes/template/cluster-role-manager-role.yaml
-Applied resource clusterrole/release-ns-yourname-operator-metrics-reader from the file digitalai/dai-release/ns-yourname/20221031-152355/kubernetes/template/cluster-role-metrics-reader.yaml
-Applied resource service/xlr-operator-controller-manager-metrics-service from the file digitalai/dai-release/ns-yourname/20221031-152355/kubernetes/template/controller-manager-metrics-service.yaml
-Applied resource deployment/xlr-operator-controller-manager from the file digitalai/dai-release/ns-yourname/20221031-152355/kubernetes/template/deployment.yaml
-Applied resource role/xlr-operator-leader-election-role from the file digitalai/dai-release/ns-yourname/20221031-152355/kubernetes/template/leader-election-role.yaml
-Applied resource rolebinding/xlr-operator-leader-election-rolebinding from the file digitalai/dai-release/ns-yourname/20221031-152355/kubernetes/template/leader-election-rolebinding.yaml
-Applied resource clusterrolebinding/release-ns-yourname-operator-manager-rolebinding from the file digitalai/dai-release/ns-yourname/20221031-152355/kubernetes/template/manager-rolebinding.yaml
-Applied resource clusterrolebinding/release-ns-yourname-operator-proxy-rolebinding from the file digitalai/dai-release/ns-yourname/20221031-152355/kubernetes/template/proxy-rolebinding.yaml
-Applied resource digitalairelease/dai-xlr-ns-yourname from the file digitalai/dai-release/ns-yourname/20221031-152355/kubernetes/dai-release_cr.yaml
+Applied resource service/xlr-operator-controller-manager-metrics-service from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/controller-manager-metrics-service.yaml
+Applied resource deployment/xlr-operator-controller-manager from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/deployment.yaml
+Applied resource role/xlr-operator-leader-election from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/leader-election-role.yaml
+Applied resource rolebinding/xlr-operator-leader-election from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/leader-election-rolebinding.yaml
+Applied resource clusterrole/ns-yourname-xlr-operator-manager from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/manager-clusterrole.yaml
+Applied resource clusterrolebinding/ns-yourname-xlr-operator-manager from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/manager-clusterrolebinding.yaml
+Applied resource role/xlr-operator-manager from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/manager-role.yaml
+Applied resource rolebinding/xlr-operator-manager from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/manager-rolebinding.yaml
+Applied resource role/xlr-operator-proxy from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/proxy-role.yaml
+Applied resource rolebinding/xlr-operator-proxy from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/proxy-rolebinding.yaml
+Applied resource digitalairelease/dai-xlr-ns-yourname from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/dai-release_cr.yaml
 Upgrade finished successfully!
 ```
 
@@ -141,7 +145,7 @@ Use the following command to wait for the upgrade to be complete:
 xl kube check --skip-collecting --skip-prompts --wait-for-ready 5
 ```
 
-When done, reload Release in the browser and check the version number again. It should now be **Version 22.3.1**
+When done, reload Release in the browser and check the version number again. It should now be **Version 24.1.0**
 
 Note: Minikube service ports are changed, check the service ports again to see which you need to use in the Release URL.
 

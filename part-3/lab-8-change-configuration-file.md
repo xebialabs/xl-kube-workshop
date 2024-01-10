@@ -1,9 +1,9 @@
 
 # Lab 8 - How to change configuration file
 
-Here we will update the configuration file on the central configuration server. We will update `deploy-server.yaml`.
+Here we will update the configuration file on the central configuration server.
 
-## Custom configuration of `deploy-repository.yaml.template` on CC pods and `logback.xml` on worker pods
+## Custom configuration of `deploy-repository.yaml.template` on CC pods
 
 ### Steps
 
@@ -11,114 +11,47 @@ Here we will update the configuration file on the central configuration server. 
    For example, if you want to update `deploy-repository.yaml.template`, it is in the 
    `/opt/xebialabs/central-configuration-server/central-conf/deploy-repository.yaml.template` in master pod.
 
+   Lets first define the variables to make the process easier
+
+   ```shell
+   export FILE_TO_UPDATE=deploy-repository.yaml.template
+   export TEMPLATE_DIR=central-conf
+   export TARGET_DIR=centralConfiguration
+   ```
+
    Download the `deploy-repository.yaml.template` from a CC pod.
 
     ```shell
-    mkdir server-confs
-    kubectl cp ns-yourname/dai-xld-ns-yourname-digitalai-deploy-cc-server-0:/opt/xebialabs/central-configuration-server/central-conf/deploy-repository.yaml.template ./server-confs/deploy-repository.yaml.template
-    kubectl cp ns-yourname/dai-xld-ns-yourname-digitalai-deploy-worker-0:/opt/xebialabs/deploy-task-engine/conf/logback.xml ./server-confs/logback.xml
+    kubectl cp -c deploy \
+   ns-yourname/dai-xld-ns-yourname-digitalai-deploy-cc-server-0:$TEMPLATE_DIR/$FILE_TO_UPDATE \
+   $FILE_TO_UPDATE
     ```
 
-   Download the `logback.xml` from a worker pod.
+2. Make our changes to the file
 
-    ```shell
-    kubectl cp ns-yourname/dai-xld-ns-yourname-digitalai-deploy-worker-0:/opt/xebialabs/deploy-task-engine/conf/logback.xml ./server-confs/logback.xml
-    ```
-
-2. Update the CR file or CR on the cluster
-
-   Use that file to update your CR file under `spec.deploy.configurationManagement.centralConfiguration.configuration.scriptData` path. Add there the content of the `deploy-repository.yaml.template` file under the `deploy-repository.yaml.template` key.
-
-   Also update the script under the `spec.deploy.configurationManagement.centralConfiguration.configuration.script` path.
-
-   For example:
-
-    ```yaml
-    ...
-    spec:
-      deploy:
-        configurationManagement:
-          centralConfiguration:
-            configuration:
+   ```shell
+   vi $FILE_TO_UPDATE
+   ```
    
-              resetCcFiles:
-                ...
-                - deploy-repository.yaml
-              script: |-
-                ...
-                cp /opt/xebialabs/central-configuration-server/xld-configuration-management/deploy-repository.yaml.template /opt/xebialabs/central-configuration-server/central-conf/deploy-repository.yaml.template && echo "Changing the deploy-repository.yaml.template";
-              scriptData:
-                ...
-                deploy-repository.yaml.template: |-
-                  xl.repository:
-                    ...
-                    database:
-                      ...
-                      connection-timeout: "60 seconds"
-                      max-pool-size: 5
-          worker:
-            configuration:
-              script: |-
-                ...
-                cp /opt/xebialabs/deploy-task-engine/xld-configuration-management/logback.xml /opt/xebialabs/deploy-task-engine/conf/logback.xml && echo "Changing the logback.xml";
-              scriptData: 
-                ...
-                logback.xml: |-
-                  <configuration>
-                    ...
-                    <root level="debug">
-                    ...
-                  </configuration>
-    ```
+3. Create a patch file
 
-3. If you have oidc enabled in CR, in that case disable it. Because the changes that are from there will conflict with your changes in the `deploy-repository.yaml.template` file.
+   ```shell
+   c=$(cat $FILE_TO_UPDATE) \
+   contentPath=".spec.centralConfiguration.extraConfiguration.${TEMPLATE_DIR}_${FILE_TO_UPDATE//./-}.content" \
+   f="${TEMPLATE_DIR}/$FILE_TO_UPDATE" \
+   filePath=".spec.centralConfiguration.extraConfiguration.${TEMPLATE_DIR}_${FILE_TO_UPDATE//./-}.path" \
+   yq -n 'eval(strenv(contentPath)) = strenv(c) | eval(strenv(filePath)) = strenv(f)' \
+   > "$FILE_TO_UPDATE.patch.yaml"
+   ```
 
-    Just in CR file put `spec.oidc.enabled: false`.
-    Note: when you disable oidc in CR, `/opt/xebialabs/central-configuration-server/centralConfiguration/deploy-oidc.yaml` will be removed. For this reason, it is necessary to copy this file also. In `spec.deploy.configurationManagement.centralConfiguration.configuration.script` you would have:
+4. Apply the patch file
 
-    ```yaml
-    ...
-    spec:
-      deploy:
-        configurationManagement:
-          centralConfiguration:
-            configuration
-              script: |-
-                ...
-                cp /opt/xebialabs/central-configuration-server/xld-configuration-management/deploy-repository.yaml.template /opt/xebialabs/central-configuration-server/central-conf/deploy-repository.yaml.template && echo "Changing the deploy-repository.yaml.template";
-                cp /opt/xebialabs/central-configuration-server/xld-configuration-management/deploy-oidc.yaml /opt/xebialabs/central-configuration-server/centralConfiguration/deploy-oidc.yaml && echo "Changing the deploy-oidc.yaml";
-              scriptData:
-                ...
-                deploy-repository.yaml.template: |-
-                  xl.repository:
-                    ...
-                    database:
-                      ...
-                      connection-timeout: "60 seconds"
-                      max-pool-size: 5
-                deploy-oidc.yaml: |-
-                  deploy.security:
-                    ...
-    ```
-
-4. Save and apply changes from the CR file. Restart pods.
-
-   Apply the changes:
-
-    ```shell
-    kubectl apply -f ./digitalai/dai-deploy/ns-yourname/20221102-205418/kubernetes/dai-deploy_cr.yaml -n ns-yourname
-    ```
-
-   Restart the pods
-
-    ```shell
-    kubectl rollout restart sts dai-xld-ns-yourname-digitalai-deploy-cc-server -n ns-yourname
-    kubectl rollout restart sts dai-xld-ns-yourname-digitalai-deploy-master -n ns-yourname
-    kubectl rollout restart sts dai-xld-ns-yourname-digitalai-deploy-worker -n ns-yourname
-    ```
-
-After restart check the `deploy-repository.yaml` on CC server, the content should have `connection-timeout` and `max-pool-size` keys.
-On the worker pods the logs will be in debug level.
+   ```shell
+   kubectl patch -n ns-yourname digitalaideploys.xld.digital.ai dai-xld-ns-yourname \
+     --type=merge --patch-file $FILE_TO_UPDATE.patch.yaml
+   ```
+   
+   The pods will now restart, after which we should be able to see our changes in the containers.
 
 ---
 

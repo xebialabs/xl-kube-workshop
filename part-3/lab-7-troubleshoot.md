@@ -237,7 +237,7 @@ OperatorImageDeployGeneric: xebialabs/deploy-operator:22.3.X
 to
 
 ```
-OperatorImageDeployGeneric: xebialabs/deploy-operator:22.3.1
+OperatorImageDeployGeneric: xebialabsunsupported/deploy-operator:24.1.0-1226.113
 ```
 
 Repeat installation with answers file
@@ -248,95 +248,79 @@ xl kube install --answers digitalai/generated_answers_dai-deploy_ns-yourname_ins
 
 ```text
 $ xl kube install --answers digitalai/generated_answers_dai-deploy_ns-yourname_install-20221031-230614.yaml
-? Following kubectl context will be used during execution: `xl-kube-workshop`? Yes
+? Following kubectl context will be used during execution: `minikube`? Yes
 	 -------------------------------- ----------------------------------------------------
 	| LABEL                          | VALUE                                              |
 	 -------------------------------- ----------------------------------------------------
 	| AccessModeDeploy               | ReadWriteOnce                                      |
-	| AdminPassword                  | ARTLY8Qgl6FPLXN7                                   |
+	| AdminPassword                  | GOtujGAU2U6XBcR7                                   |
 	| CleanBefore                    | false                                              |
 	| CreateNamespace                | true                                               |
 	| EnableIngressTls               | false                                              |
 	| EnablePostgresql               | true                                               |
 	| EnableRabbitmq                 | true                                               |
 	| ExternalOidcConf               | external: false                                    |
-	| GenerationDateTime             | 20221031-232810                                    |
+	| GenerationDateTime             | 20240108-230020                                    |
 	| ImageNameCc                    | central-configuration                              |
 	| ImageNameDeploy                | xl-deploy                                          |
 	| ImageNameDeployTaskEngine      | deploy-task-engine                                 |
-	| ImageTag                       | 22.3.1                                             |
-	| IngressHost                    | deploy-ns-yourname.westus2.cloudapp.azure.com      |
+	| ImageRegistryType              | default                                            |
+	| ImageTag                       | 24.1.0-1226.113                                    |
+	| IngressHost                    | digitalai.deploy.local.mini                        |
 	| IngressType                    | nginx                                              |
-	| K8sSetup                       | AzureAKS                                           |
-	| KeystorePassphrase             | HEXRzENbwPvn85YB                                   |
-	| License                        | LS0tIExpY2Vuc2UgLS0tCkxpY2Vuc2UgdmVyc2lvbjogMwpQ.. |
-	| LicenseFile                    | ./xld-license.lic                                  |
-	| LicenseSource                  | file                                               |
+	| IngressTypeGeneric             | nginx                                              |
+	| IngressTypeOpenshift           | route                                              |
+	| IsCustomImageRegistry          | false                                              |
+	| IsRemoteRunnerTruststoreEnab.. | false                                              |
+	| K8sSetup                       | PlainK8s                                           |
+	| KeystorePassphrase             | L5uEqIfNXag0gtL2                                   |
+	| LicenseSource                  | generate                                           |
 	| Namespace                      | ns-yourname                                        |
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
-	| OperatorImageDeployGeneric     | xebialabs/deploy-operator:22.3.1                   |
+	| OperatorImageDeploy            | deploy-operator                                    |
+	| OperatorImageTag               | 24.1.0-1226.113                                    |
 	| OsType                         | darwin                                             |
-	| PostgresqlPvcSize              | 1                                                  |
-	| PostgresqlStorageClass         | xl-kube-workshop-file-storage-class                |
+	| PostgresqlPvcSize              | 8                                                  |
+	| PostgresqlStorageClass         | standard                                           |
 	| ProcessType                    | install                                            |
-	| PvcSizeCc                      | 0.500000                                           |
-	| PvcSizeDeploy                  | 1                                                  |
-	| PvcSizeDeployTaskEngine        | 1                                                  |
-	| RabbitmqPvcSize                | 1                                                  |
+	| PvcSizeDeploy                  | 10                                                 |
+	| PvcSizeDeployTaskEngine        | 10                                                 |
+	| RabbitmqPvcSize                | 8                                                  |
 	| RabbitmqReplicaCount           | 1                                                  |
-	| RabbitmqStorageClass           | broken-storage                                     |
+	| RabbitmqStorageClass           | standard                                           |
+	| RemoteRunnerGeneration         | false                                              |
+	| RemoteRunnerInstall            | false                                              |
+	| RemoteRunnerInstallConfirm     | false                                              |
+	| RemoteRunnerReleaseName        | remote-runner                                      |
+	| RemoteRunnerUseDefaultLocation | true                                               |
 	| RepositoryKeystoreSource       | generate                                           |
-	| RepositoryName                 | xebialabs                                          |
+	| RepositoryName                 | xebialabsunsupported                               |
 	| ServerType                     | dai-deploy                                         |
 	| ShortServerName                | xld                                                |
-	| StorageClass                   | xl-kube-workshop-file-storage-class                |
+	| StorageClass                   | standard                                           |
 	| UseCustomNamespace             | true                                               |
-	| XldMasterCount                 | 2                                                  |
-	| XldWorkerCount                 | 2                                                  |
+	| XldMasterCount                 | 1                                                  |
+	| XldWorkerCount                 | 1                                                  |
 	 -------------------------------- ----------------------------------------------------
 ? Do you want to proceed to the deployment with these values? Yes
-For current process files will be generated in the: digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes
-Generated answers file successfully: digitalai/generated_answers_dai-deploy_ns-yourname_install-20221031-232810.yaml
-Starting install processing.
-Created keystore digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/repository-keystore.jceks
-Skip creating namespace ns-yourname, already exists
-Update central configuration values... - Using custom resource name dai-xld-ns-yourname
-Generated files successfully for AzureAKS installation.
+For current process files will be generated in the: digitalai/dai-deploy/ns-yourname/20240108-230020/kubernetes
+Generated answers file successfully: digitalai/generated_answers_dai-deploy_ns-yourname_install-20240108-230020.yaml 
+Starting 'install' processing and will use generated files from reference install 20240108-225255 with files from digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes.
+? Do you want to apply resources from previous run '20240108-225255': Yes
 Applying resources to the cluster!
-? Do you want to replace the resource clusterrole/deploy-ns-yourname-operator-proxy-role with specification from file
-digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/cluster-role-digital-proxy-role.yaml: Yes
-Applied resource clusterrole/deploy-ns-yourname-operator-proxy-role from the file digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/cluster-role-digital-proxy-role.yaml
-? Do you want to replace the resource clusterrole/deploy-ns-yourname-operator-manager-role with specification from file
-digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/cluster-role-manager-role.yaml: Yes
-Applied resource clusterrole/deploy-ns-yourname-operator-manager-role from the file digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/cluster-role-manager-role.yaml
-? Do you want to replace the resource clusterrole/deploy-ns-yourname-operator-metrics-reader with specification from file
-digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/cluster-role-metrics-reader.yaml: Yes
-Applied resource clusterrole/deploy-ns-yourname-operator-metrics-reader from the file digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/cluster-role-metrics-reader.yaml
-? Do you want to replace the resource service/xld-operator-controller-manager-metrics-service with specification from file
-digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/controller-manager-metrics-service.yaml: Yes
-Applied resource service/xld-operator-controller-manager-metrics-service from the file digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/controller-manager-metrics-service.yaml
-? Do you want to replace the resource customresourcedefinition/digitalaideploys.xld.digital.ai with specification from file
-digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/custom-resource-definition.yaml: Yes
-Applied resource customresourcedefinition/digitalaideploys.xld.digital.ai from the file digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/custom-resource-definition.yaml
-? Do you want to replace the resource deployment/xld-operator-controller-manager with specification from file
-digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/deployment.yaml: Yes
-Applied resource deployment/xld-operator-controller-manager from the file digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/deployment.yaml
-? Do you want to replace the resource role/xld-operator-leader-election-role with specification from file
-digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/leader-election-role.yaml: Yes
-Applied resource role/xld-operator-leader-election-role from the file digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/leader-election-role.yaml
-? Do you want to replace the resource rolebinding/xld-operator-leader-election-rolebinding with specification from file
-digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/leader-election-rolebinding.yaml: Yes
-Applied resource rolebinding/xld-operator-leader-election-rolebinding from the file digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/leader-election-rolebinding.yaml
-? Do you want to replace the resource clusterrolebinding/deploy-ns-yourname-operator-manager-rolebinding with specification from file
-digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/manager-rolebinding.yaml: Yes
-Applied resource clusterrolebinding/deploy-ns-yourname-operator-manager-rolebinding from the file digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/manager-rolebinding.yaml
-? Do you want to replace the resource clusterrolebinding/deploy-ns-yourname-operator-proxy-rolebinding with specification from file
-digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/proxy-rolebinding.yaml: Yes
-Applied resource clusterrolebinding/deploy-ns-yourname-operator-proxy-rolebinding from the file digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/template/proxy-rolebinding.yaml
-? Do you want to replace the resource digitalaideploy/dai-xld-ns-yourname with specification from file
-digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/dai-deploy_cr.yaml: Yes
-Applied resource digitalaideploy/dai-xld-ns-yourname from the file digitalai/dai-deploy/ns-yourname/20221031-232810/kubernetes/dai-deploy_cr.yaml
+Applied resource service/xld-operator-controller-manager-metrics-service from the file digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes/template/controller-manager-metrics-service.yaml
+Applied resource customresourcedefinition/digitalaideploys.xld.digital.ai from the file digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes/template/custom-resource-definition.yaml
+Applied resource deployment/xld-operator-controller-manager from the file digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes/template/deployment.yaml
+Applied resource role/xld-operator-leader-election from the file digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes/template/leader-election-role.yaml
+Applied resource rolebinding/xld-operator-leader-election from the file digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes/template/leader-election-rolebinding.yaml
+Applied resource clusterrole/ns-yourname-xld-operator-manager from the file digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes/template/manager-clusterrole.yaml
+Applied resource clusterrolebinding/ns-yourname-xld-operator-manager from the file digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes/template/manager-clusterrolebinding.yaml
+Applied resource role/xld-operator-manager from the file digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes/template/manager-role.yaml
+Applied resource rolebinding/xld-operator-manager from the file digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes/template/manager-rolebinding.yaml
+Applied resource role/xld-operator-proxy from the file digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes/template/proxy-role.yaml
+Applied resource rolebinding/xld-operator-proxy from the file digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes/template/proxy-rolebinding.yaml
+Applied resource digitalaideploy/dai-xld-ns-yourname from the file digitalai/dai-deploy/ns-yourname/20240108-225255/kubernetes/dai-deploy_cr.yaml
 Install finished successfully!
 ```
 
