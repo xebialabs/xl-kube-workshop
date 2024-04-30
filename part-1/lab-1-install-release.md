@@ -39,14 +39,16 @@ Before we kick it off, let's get our ducks in a row
   - `release-ns-yourname.westus2.cloudapp.azure.com`.  
   ⚠️ The host name depends on the region the cluster is in. Refer to [Confluence](https://digitalai.atlassian.net/wiki/spaces/Labs/pages/76855148558/xl+kube+workshop+--+Passwords+Clusters) to find out which region you are in,
 - When using minikube or Docker you can use any host name you want, for example
-  - `release-ns-yourname.local`.
-- On Azure we use two custom storage classes.They already exist on the cluster:
+  - `release-ns-yourname.local`
+  - Also make sure this host name has a entry in /etc/hosts file.
+- On minikube we can use the standard storage class, also the default.  
+- On Azure we use two custom storage classes. They already exist on the cluster:
   - `xl-kube-workshop-file-storage-class` based on [Azure Files Dynamic](https://docs.microsoft.com/en-us/azure/aks/azure-files-dynamic-pv)
   - `xl-kube-workshop-disk-storage-class` based on [Azure Disk Dynamic](https://docs.microsoft.com/en-us/azure/aks/azure-disks-dynamic-pv)
 
 Now let's get started!
 
-Kick off the `xl kube install` command and look closely at the answers below. Note that sometimes you can take the default, sometimes you need to give the value as prompted below and sometimes you need to give a custom value. Please take it slow -- this wizard is a very concentrated form of all needed parameters for a Kubernetes based installation and doesn't lend itself very well to rush through it with a next-next-next approach. Kubernetes itself can be bewildering if everything is not specified exactly as it should, so you can save some time debugging by putting in the values with care. 
+Kick off the `xl kube install` command and look closely at the answers below. Note that sometimes you can take the default, sometimes you need to give the value as prompted below and sometimes you need to give a custom value. Please take it slow -- this wizard is a very concentrated form of all needed parameters for a Kubernetes based installation and doesn't lend itself very well to rush through it with a next-next-next approach. Kubernetes itself can be bewildering if everything is not specified exactly as it should, so you can save some time from debugging by putting in the values with care. 
 
 We've marked some of the questions where you need to pay extra attention with a warning sign.
 
@@ -340,7 +342,7 @@ spec:
         service.beta.kubernetes.io/azure-dns-label-name: release-ns-yourname        
 ```
 
-Save the the file and apply the changes to Kubernetes with the command:
+Save the file and apply the changes to Kubernetes with the command:
 
 ```shell
 kubectl apply -n ns-yourname -f digitalai/dai-release/ns-yourname/20240105-142459/kubernetes/dai-release_cr.yaml
@@ -462,7 +464,7 @@ spec:
       type: NodePort
 ```
 
-Save the the file and apply the changes to Kubernetes with the command:
+Save the file and apply the changes to Kubernetes with the command:
 
 ```shell
 kubectl apply -n ns-yourname -f digitalai/dai-release/ns-yourname/20221031-131244/kubernetes/dai-release_cr.yaml

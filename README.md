@@ -22,7 +22,7 @@ Workshop for installing Digital.ai Release and Digital.ai Deploy on a Kubernetes
 
 ### Optional
 
-- Java 17 - keytool (only if you plan to use the generation of the keystore inside the xl-cli kube) # todo
+- Java 17 - keytool (only if you plan to use the generation of the keystore inside the xl-cli kube)
 - [helm](https://helm.sh/docs/intro/install/) - if you would like to get additional info 
 - [k9s](https://k9scli.io/topics/install/) - Kubernetes CLI To Manage Your Clusters In Style
 
@@ -33,7 +33,7 @@ if you have any questions or troubles, contact your Digital.ai representative
 
 ### General remarks
 
-* `xl something --help` is your friend! For example: `xl kube install --help`
+* `xl <command> --help` is your friend! For example: `xl kube install --help`
 
 ### [Part 0](./part-0/lab-0-setup-kubectl-context.md)
 

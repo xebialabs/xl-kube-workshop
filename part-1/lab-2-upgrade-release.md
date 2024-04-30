@@ -18,9 +18,11 @@ xl kube upgrade --skip-prompts
 
 * **For Minikube:** All custom changes in the CR after installation must be preserved. So for the answer  `Edit list of custom resource keys that will migrate to the new Release CR:` you need to add all keys under which you changed the values. We have one example from previous lab `.spec.nginx-ingress-controller.service.type`, because of that we need to add key in the list, in the new line `.spec.nginx-ingress-controller.service.type`.
 
-* We are upgrading from Operator to Operator. Note: the `xl kube upgrade` command can be used to upgrade helm-based installations from 10.2 and higher XXX Check this value 
+* We are upgrading from Operator to Operator. Note: the `xl kube upgrade` command can also be used to upgrade helm-based installations from 10.2 and higher to operator based installation. 
 
-For the other questions and answers details check [Upgrade Wizard for Digital.ai Release](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/operator/xl-op-upgrade-wizard-release.html)
+For details of CR keys that will migrate to new CR, check [Custom resource keys migration during upgrade](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/operator/xl-op-upgrade-custom-resource-keys.html)
+
+For the other questions and answers details, check [Upgrade Wizard for Digital.ai Release](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/operator/xl-op-upgrade-wizard-release.html)
 
 
 Here is example of the upgrade answers, based on Azure:
