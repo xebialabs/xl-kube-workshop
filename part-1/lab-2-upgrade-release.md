@@ -1,7 +1,7 @@
 
-# Lab 2 - Upgrade Release 24.1.0
+# Lab 2 - Upgrade Release to 24.3.3
 
-In this lab we will upgrade the previous installation to Digital.ai Release 24.1.0.
+In this lab we will upgrade the previous installation to Digital.ai Release 24.3.3.
 
 Just start upgrade process by running:
 
@@ -20,9 +20,9 @@ xl kube upgrade --skip-prompts
 
 * We are upgrading from Operator to Operator. Note: the `xl kube upgrade` command can also be used to upgrade helm-based installations from 10.2 and higher to operator based installation. 
 
-For details of CR keys that will migrate to new CR, check [Custom resource keys migration during upgrade](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/operator/xl-op-upgrade-custom-resource-keys.html)
+For details of CR keys that will migrate to new CR, check [Custom resource keys migration during upgrade](https://docs.digital.ai/release/docs/xl-platform/operator/xl-op-upgrade-custom-resource-keys)
 
-For the other questions and answers details, check [Upgrade Wizard for Digital.ai Release](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/operator/xl-op-upgrade-wizard-release.html)
+For the other questions and answers details, check [Upgrade Wizard for Digital.ai Release](https://docs.digital.ai/release/docs/xl-platform/operator/xl-op-upgrade-wizard-release)
 
 
 Here is example of the upgrade answers, based on Azure:
@@ -38,10 +38,10 @@ $ xl kube upgrade --skip-prompts
 ? Select type of image registry: default [Default (Uses various public image registries for the installation images)]
 ? Enter the repository name for the application and operator images (eg: <repositoryName> from <repositoryName>/<imageName>:<tagName>): xebialabsunsupported
 ? Enter the Release image name (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): xl-release
-⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.1.0-1226.113
+⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.3
 ? Type of the OIDC configuration: no-oidc [No OIDC Configuration]
 ? Enter the operator image to use (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): release-operator
-⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.1.0-1226.113
+⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.3
 ? Enter the name of custom resource definition you want to reuse or replace: digitalaireleases.xlr.digital.ai
 ⚠️? Should CRD be reused, if No we will delete the CRD digitalaireleases.xlr.digital.ai, and all related CRs will be deleted with it: Yes
 ? Enter the name of custom resource: dai-xlr-ns-yourname
@@ -60,7 +60,7 @@ $ xl kube upgrade --skip-prompts
 	| GenerationDateTime             | 20240108-114406                                    |
 	| ImageNameRelease               | xl-release                                         |
 	| ImageRegistryType              | default                                            |
-	| ImageTag                       | 24.1.0-1226.113                                    |
+	| ImageTag                       | 24.3.3                                             |
 	| IngressType                    | nginx                                              |
 	| IngressTypeGeneric             | nginx                                              |
 	| IngressTypeOpenshift           | route                                              |
@@ -72,7 +72,7 @@ $ xl kube upgrade --skip-prompts
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeUpgrade          | no-oidc                                            |
 	| OperatorImageRelease           | release-operator                                   |
-	| OperatorImageTag               | 24.1.0-1226.113                                    |
+	| OperatorImageTag               | 24.3.3                                             |
 	| OsType                         | darwin                                             |
 	| PreserveCrValuesRelease        | .metadata.name: .\n.spec.persistence.storageClas.. |
 	| PreservePvc                    | true                                               |
@@ -91,7 +91,7 @@ $ xl kube upgrade --skip-prompts
 For current process files will be generated in the: digitalai/dai-release/ns-yourname/20240108-111630/kubernetes
 Generated answers file successfully: digitalai/generated_answers_dai-release_ns-yourname_upgrade-20240108-111630.yaml 
 Starting upgrade processing
-Fetching values from cluster... -Upgrading from old version 23.3.2
+Fetching values from cluster... -Upgrading from old version 24.3.2
 Generated files successfully for operatorToOperator upgrade for PlainK8s.
 CRD creation will be skipped, expecting to have CRD already on cluster
 Cleaning the resources on the cluster!
@@ -105,29 +105,22 @@ Deleting deployments
 Deleted deployment/xlr-operator-controller-manager from namespace ns-yourname
 Deleting jobs
 Deleting services
-Deleted svc/xlr-operator-controller-manager-metrics-service from namespace ns-yourname
 Deleting secrets
 Deleted secret/sh.helm.release.v1.dai-xlr-ns-yourname.v1 from namespace ns-yourname
 Deleting configmaps
 Deleted configmap/xlr-operator-controller-manager from namespace ns-yourname
 Deleted ingressclass/nginx-dai-xlr-ns-yourname from namespace ns-yourname
 Deleting roles
-Deleted role/xlr-operator-leader-election from namespace ns-yourname
 Deleted role/xlr-operator-manager from namespace ns-yourname
-Deleted role/xlr-operator-proxy from namespace ns-yourname
 Deleted clusterrole/dai-xlr-ns-yourname-nginx-ingress-controller from namespace ns-yourname
 Deleted clusterrole/ns-yourname-xlr-operator-manager from namespace ns-yourname
-Deleted rolebinding/xlr-operator-leader-election from namespace ns-yourname
 Deleted rolebinding/xlr-operator-manager from namespace ns-yourname
 Deleted rolebinding/xlr-operator-proxy from namespace ns-yourname
 Deleted clusterrolebinding/dai-xlr-ns-yourname-nginx-ingress-controller from namespace ns-yourname
 Deleted clusterrolebinding/ns-yourname-xlr-operator-manager from namespace ns-yourname
 Patch PVCs
 Applying resources to the cluster!
-Applied resource service/xlr-operator-controller-manager-metrics-service from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/controller-manager-metrics-service.yaml
 Applied resource deployment/xlr-operator-controller-manager from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/deployment.yaml
-Applied resource role/xlr-operator-leader-election from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/leader-election-role.yaml
-Applied resource rolebinding/xlr-operator-leader-election from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/leader-election-rolebinding.yaml
 Applied resource clusterrole/ns-yourname-xlr-operator-manager from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/manager-clusterrole.yaml
 Applied resource clusterrolebinding/ns-yourname-xlr-operator-manager from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/manager-clusterrolebinding.yaml
 Applied resource role/xlr-operator-manager from the file digitalai/dai-release/ns-yourname/20240108-111630/kubernetes/template/manager-role.yaml
@@ -147,7 +140,7 @@ Use the following command to wait for the upgrade to be complete:
 xl kube check --skip-collecting --skip-prompts --wait-for-ready 5
 ```
 
-When done, reload Release in the browser and check the version number again. It should now be **Version 24.1.0**
+When done, reload Release in the browser and check the version number again. It should now be **Version 24.3.3**
 
 Note: Minikube service ports are changed, check the service ports again to see which you need to use in the Release URL.
 

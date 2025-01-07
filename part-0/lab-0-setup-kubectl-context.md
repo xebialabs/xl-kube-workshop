@@ -10,8 +10,8 @@ Connect to Slack channel `#xl-kube-workshop`
 Check all prerequisites:
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- [xl-cli 24.1.0](https://dist.xebialabs.com/public/xl-cli/24.1.0/)
-  - [Install the XL CLI](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/how-to/install-the-xl-cli.html)
+- [xl-cli 24.3.x](https://dist.xebialabs.com/public/xl-cli/24.3.2/)
+  - [Install the XL CLI](https://docs.digital.ai/release/docs/xl-platform/operator/xl-kube)
 - [yq](https://github.com/mikefarah/yq)
 - Java 17 - keytool (only if you plan to use the generation of the keystore inside the xl-cli kube)
 - A directory from where you will run `xl kube` commands
@@ -27,10 +27,10 @@ Real values of parameters will be provided on the Slack channel `#xl-kube-worksh
 Run:
 
 ```shell
-export AZURE_USERNAME=xl-test-azure...
-export AZURE_PASSWORD=put_password_from_1pass
-export RESOURCE_GROUP=xl-kube-workshop-group-X
-export CLUSTER_NAME=xl-kube-workshop-X
+export AZURE_USERNAME=...
+export AZURE_PASSWORD=...
+export RESOURCE_GROUP=...
+export CLUSTER_NAME=...
 az login -u $AZURE_USERNAME -p $AZURE_PASSWORD 
 az aks get-credentials --resource-group $RESOURCE_GROUP --name $CLUSTER_NAME --overwrite-existing
 ```
@@ -89,14 +89,14 @@ For example, it will return for minikube:
 
 ```text
 $ kubectl version
-Client Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.2", GitCommit:"7f6f68fdabc4df88cfea2dcf9a19b2b830f1e647", GitTreeState:"clean", BuildDate:"2023-05-17T14:20:07Z", GoVersion:"go1.20.4", Compiler:"gc", Platform:"darwin/amd64"}
+Client Version: version.Info{Major:"1", Minor:"30", GitVersion:"v1.30.x", ...}
 Kustomize Version: v5.0.1
-Server Version: version.Info{Major:"1", Minor:"27", GitVersion:"v1.27.4", GitCommit:"fa3d7990104d7c1f16943a67f11b154b71f6a132", GitTreeState:"clean", BuildDate:"2023-07-19T12:14:49Z", GoVersion:"go1.20.6", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"30", GitVersion:"v1.30.x", ...}
 ```
 
 ## Check `xl` command
 
-The `xl`command version 24.1.0 should be in the path. Check this with the following command:
+The `xl`command version 24.3.x should be in the path. Check this with the following command:
 
 ```shell
 xl version
@@ -106,14 +106,14 @@ Example of the response on linux:
 
 ```text
 $ xl version
-CLI version:             24.1.0-1226.113
-Git version:             v24.1.0-1221.113-0-gc0a91cd-dirty
+CLI version:             24.3.2
+Git version:             v24.3.1-0-g946951e
 Deploy API version:      xl-deploy/v1
 Release API version:     xl-release/v1
-Git commit:              c0a91cd72f97c4696ab016c085225e7bd63a6eca
-Build date:              2023-12-26T03:36:21.262Z
-GO version:              go1.21.4
-OS/Arch:                 darwin/amd64
+Git commit:              946951e4d6fc9cbd8e9ce3cd79b7f0e466f3b0a1
+Build date:              2024-11-27T04:32:48.298Z
+GO version:              go1.21.8
+OS/Arch:                 linux/amd64
 ```
 
 ## Monitor Kubernetes

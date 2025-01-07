@@ -6,7 +6,7 @@ We will now try to detect and correct problems that can happen during installati
 ## Installation with few errors
 
 Do installation with following errors:
-- not existing operator image: xebialabs/deploy-operator:24.1.X
+- not existing operator image: xebialabs/deploy-operator:24.3.2
 - wrong storage class on the postgresql PVC, we will use xl-kube-workshop-file-storage-class StorageClass on the Azure, that StorageClass is not providing required block storage 
   - on Minikube and Docker Desktop we don't have this option so we will use broken StorageClass called `broken-storage`
 - wrong storage class on the RabbitMQ, we will use broken StorageClass called `broken-storage`
@@ -41,7 +41,7 @@ $ xl kube install
 ? Select type of image registry: default [Default (Uses various public image registries for the installation images)]
 ? Enter the repository name for the application and operator images (eg: <repositoryName> from <repositoryName>/<imageName>:<tagName>): xebialabsunsupported
 ? Enter the Deploy server image name (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): xl-deploy
-? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.1.0-beta.7
+? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.2
 ? Enter the deploy task engine image name for version 22 and above (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): deploy-task-engine
 ? Enter the central configuration image name for version 22 and above (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): central-configuration
 ? Select source of the license: generate [Generate the license (accepting EULA, this is only for temporary license)]
@@ -57,7 +57,7 @@ $ xl kube install
 ? Provide administrator password: C9KOewb2Yr4Ujy7c
 ? Type of the OIDC configuration: no-oidc [No OIDC Configuration]
 ? Enter the operator image to use (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): deploy-operator
-? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.1.X
+? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.2
 ? Select source of the repository keystore: generate [Generate the repository keystore during installation (you need to have keytool utility installed in your path)]
 ? Provide repository keystore passphrase: IwZZ3X9DtMfmwxdF
 ? Provide storage class for the server: standard
@@ -85,7 +85,7 @@ $ xl kube install
 	| ImageNameDeploy                | xl-deploy                                          |
 	| ImageNameDeployTaskEngine      | deploy-task-engine                                 |
 	| ImageRegistryType              | default                                            |
-	| ImageTag                       | 24.1.0-beta.7                                      |
+	| ImageTag                       | 24.3.2                                             |
 	| IngressHost                    | deploy-ns-yourname.local                           |
 	| IngressKeystoreSource          | generate                                           |
 	| IngressType                    | nginx                                              |
@@ -99,7 +99,7 @@ $ xl kube install
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
 	| OperatorImageDeploy            | deploy-operator                                    |
-	| OperatorImageTag               | 24.1.X                                             |
+	| OperatorImageTag               | 24.3.2                                             |
 	| OsType                         | linux                                              |
 	| PostgresqlPvcSize              | 1                                                  |
 	| PostgresqlStorageClass         | broken-storage                                     |
@@ -136,11 +136,8 @@ Created keystore digitalai/dai-deploy/digitalai/20240429-173358/kubernetes/repos
 Skip creating namespace digitalai, already exists
 Generated files successfully for PlainK8s installation.
 Applying resources to the cluster!
-Applied resource service/xld-operator-controller-manager-metrics-service from the file digitalai/dai-deploy/digitalai/20240429-173358/kubernetes/template/controller-manager-metrics-service.yaml
 Applied resource customresourcedefinition/digitalaideploys.xld.digital.ai from the file digitalai/dai-deploy/digitalai/20240429-173358/kubernetes/template/custom-resource-definition.yaml
 Applied resource deployment/xld-operator-controller-manager from the file digitalai/dai-deploy/digitalai/20240429-173358/kubernetes/template/deployment.yaml
-Applied resource role/xld-operator-leader-election from the file digitalai/dai-deploy/digitalai/20240429-173358/kubernetes/template/leader-election-role.yaml
-Applied resource rolebinding/xld-operator-leader-election from the file digitalai/dai-deploy/digitalai/20240429-173358/kubernetes/template/leader-election-rolebinding.yaml
 Applied resource clusterrole/xld-operator-manager from the file digitalai/dai-deploy/digitalai/20240429-173358/kubernetes/template/manager-clusterrole.yaml
 Applied resource clusterrolebinding/xld-operator-manager from the file digitalai/dai-deploy/digitalai/20240429-173358/kubernetes/template/manager-clusterrolebinding.yaml
 Applied resource role/xld-operator-manager from the file digitalai/dai-deploy/digitalai/20240429-173358/kubernetes/template/manager-role.yaml
@@ -248,25 +245,25 @@ Events:
   Normal   Created    11m                  kubelet            Created container kube-rbac-proxy
   Normal   Started    11m                  kubelet            Started container kube-rbac-proxy
   Warning  Failed     10m (x4 over 11m)    kubelet            Error: ImagePullBackOff
-  Normal   Pulling    9m51s (x4 over 11m)  kubelet            Pulling image "docker.io/xebialabsunsupported/deploy-operator:24.1.X"
-  Warning  Failed     9m49s (x4 over 11m)  kubelet            Failed to pull image "docker.io/xebialabsunsupported/deploy-operator:24.1.X": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/xebialabsunsupported/deploy-operator:24.1.X": failed to resolve reference "docker.io/xebialabsunsupported/deploy-operator:24.1.X": docker.io/xebialabsunsupported/deploy-operator:24.1.X: not found
+  Normal   Pulling    9m51s (x4 over 11m)  kubelet            Pulling image "docker.io/xebialabsunsupported/deploy-operator:24.3.2"
+  Warning  Failed     9m49s (x4 over 11m)  kubelet            Failed to pull image "docker.io/xebialabsunsupported/deploy-operator:24.3.2": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/xebialabsunsupported/deploy-operator:24.3.2": failed to resolve reference "docker.io/xebialabsunsupported/deploy-operator:24.3.2": docker.io/xebialabsunsupported/deploy-operator:24.3.2: not found
   Warning  Failed     9m49s (x4 over 11m)  kubelet            Error: ErrImagePull
-  Normal   BackOff    80s (x41 over 11m)   kubelet            Back-off pulling image "docker.io/xebialabsunsupported/deploy-operator:24.1.X"
+  Normal   BackOff    80s (x41 over 11m)   kubelet            Back-off pulling image "docker.io/xebialabsunsupported/deploy-operator:24.3.2"
 ```
 
-The events have reason of the failure: `Failed to pull image "docker.io/xebialabsunsupported/deploy-operator:24.1.X": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/xebialabsunsupported/deploy-operator:24.1.X": failed to resolve reference "docker.io/xebialabsunsupported/deploy-operator:24.1.X": docker.io/xebialabsunsupported/deploy-operator:24.1.X: not found`.
+The events have reason of the failure: `Failed to pull image "docker.io/xebialabsunsupported/deploy-operator:24.3.2": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/xebialabsunsupported/deploy-operator:24.3.2": failed to resolve reference "docker.io/xebialabsunsupported/deploy-operator:24.3.2": docker.io/xebialabsunsupported/deploy-operator:24.3.2: not found`.
 
 Ok, we can fix that by editing answers file from previous installation and run same installation again.
 We edit the digitalai/generated_answers_dai-deploy_digitalai_install-20240429-173358.yaml and change the line from:
 
 ```
-OperatorImageTag: 24.1.X
+OperatorImageTag: 24.3.2
 ```
 
 to
 
 ```
-OperatorImageTag: 24.1.0-beta.7
+OperatorImageTag: 24.3.2
 ```
 
 Repeat installation with answers file
@@ -295,7 +292,7 @@ $ xl kube install --answers digitalai/generated_answers_dai-deploy_digitalai_ins
 	| ImageNameDeploy                | xl-deploy                                          |
 	| ImageNameDeployTaskEngine      | deploy-task-engine                                 |
 	| ImageRegistryType              | default                                            |
-	| ImageTag                       | 24.1.0-beta.7                                      |
+	| ImageTag                       | 24.3.2                                             |
 	| IngressHost                    | deploy-ns-yourname.local                           |
 	| IngressKeystoreSource          | generate                                           |
 	| IngressType                    | nginx                                              |
@@ -309,7 +306,7 @@ $ xl kube install --answers digitalai/generated_answers_dai-deploy_digitalai_ins
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
 	| OperatorImageDeploy            | deploy-operator                                    |
-	| OperatorImageTag               | 24.1.0-beta.7                                      |
+	| OperatorImageTag               | 24.3.2                                             |
 	| OsType                         | linux                                              |
 	| PostgresqlPvcSize              | 1                                                  |
 	| PostgresqlStorageClass         | broken-storage                                     |
@@ -346,21 +343,12 @@ Created keystore digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/repos
 Skip creating namespace digitalai, already exists
 Generated files successfully for PlainK8s installation.
 Applying resources to the cluster!
-? Do you want to replace the resource service/xld-operator-controller-manager-metrics-service with specification from file
-digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/template/controller-manager-metrics-service.yaml: Yes
-Applied resource service/xld-operator-controller-manager-metrics-service from the file digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/template/controller-manager-metrics-service.yaml
 ? Do you want to replace the resource customresourcedefinition/digitalaideploys.xld.digital.ai with specification from file
 digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/template/custom-resource-definition.yaml: Yes
 Applied resource customresourcedefinition/digitalaideploys.xld.digital.ai from the file digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/template/custom-resource-definition.yaml
 ? Do you want to replace the resource deployment/xld-operator-controller-manager with specification from file
 digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/template/deployment.yaml: Yes
 Applied resource deployment/xld-operator-controller-manager from the file digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/template/deployment.yaml
-? Do you want to replace the resource role/xld-operator-leader-election with specification from file
-digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/template/leader-election-role.yaml: Yes
-Applied resource role/xld-operator-leader-election from the file digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/template/leader-election-role.yaml
-? Do you want to replace the resource rolebinding/xld-operator-leader-election with specification from file
-digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/template/leader-election-rolebinding.yaml: Yes
-Applied resource rolebinding/xld-operator-leader-election from the file digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/template/leader-election-rolebinding.yaml
 ? Do you want to replace the resource clusterrole/xld-operator-manager with specification from file
 digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/template/manager-clusterrole.yaml: Yes
 Applied resource clusterrole/xld-operator-manager from the file digitalai/dai-deploy/digitalai/20240429-180918/kubernetes/template/manager-clusterrole.yaml
@@ -553,7 +541,7 @@ xl kube install --clean-before --skip-prompts --answers digitalai/generated_answ
 	| ImageNameDeploy                | xl-deploy                                          |
 	| ImageNameDeployTaskEngine      | deploy-task-engine                                 |
 	| ImageRegistryType              | default                                            |
-	| ImageTag                       | 24.1.0-beta.7                                      |
+	| ImageTag                       | 24.3.2                                             |
 	| IngressHost                    | deploy-ns-yourname.local                           |
 	| IngressKeystoreSource          | generate                                           |
 	| IngressType                    | nginx                                              |
@@ -568,7 +556,7 @@ xl kube install --clean-before --skip-prompts --answers digitalai/generated_answ
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
 	| OperatorImageDeploy            | deploy-operator                                    |
-	| OperatorImageTag               | 24.1.0-beta.7                                      |
+	| OperatorImageTag               | 24.3.2                                             |
 	| OsType                         | linux                                              |
 	| PostgresqlPvcSize              | 1                                                  |
 	| PostgresqlStorageClass         | broken-storage                                     |
@@ -626,8 +614,6 @@ Deleting deployments
 Deleted deployment/xld-operator-controller-manager from namespace digitalai
 Deleting jobs
 Deleting services
-? Do you want to delete the resource svc/xld-operator-controller-manager-metrics-service: Yes
-Deleted svc/xld-operator-controller-manager-metrics-service from namespace digitalai
 Deleting secrets
 ? Do you want to delete the resource secret/dai-xld-digitalai-deploy-license: Yes
 Deleted secret/dai-xld-digitalai-deploy-license from namespace digitalai
@@ -637,8 +623,6 @@ Deleted configmap/xld-operator-controller-manager from namespace digitalai
 ? Do you want to delete the resource ingressclass/nginx-dai-xld: Yes
 Deleted ingressclass/nginx-dai-xld from namespace digitalai
 Deleting roles
-? Do you want to delete the resource role/xld-operator-leader-election: Yes
-Deleted role/xld-operator-leader-election from namespace digitalai
 ? Do you want to delete the resource role/xld-operator-manager: Yes
 Deleted role/xld-operator-manager from namespace digitalai
 ? Do you want to delete the resource role/xld-operator-proxy: Yes
@@ -647,8 +631,6 @@ Deleted role/xld-operator-proxy from namespace digitalai
 Deleted clusterrole/xld-operator-manager from namespace digitalai
 ? Do you want to delete the resource clusterrole/dai-xld-nginx-ingress-controller: Yes
 Deleted clusterrole/dai-xld-nginx-ingress-controller from namespace digitalai
-? Do you want to delete the resource rolebinding/xld-operator-leader-election: Yes
-Deleted rolebinding/xld-operator-leader-election from namespace digitalai
 ? Do you want to delete the resource rolebinding/xld-operator-manager: Yes
 Deleted rolebinding/xld-operator-manager from namespace digitalai
 ? Do you want to delete the resource rolebinding/xld-operator-proxy: Yes
@@ -672,13 +654,10 @@ Skipping delete of the resource crd/digitalaideploys.xld.digital.ai
 ? Do you want to delete the resource crd/digitalaideploys.xld.digital.ai: No
 Skipping delete of the resource crd/digitalaideploys.xld.digital.ai
 Applying resources to the cluster!
-Applied resource service/xld-operator-controller-manager-metrics-service from the file digitalai/dai-deploy/digitalai/20240429-190735/kubernetes/template/controller-manager-metrics-service.yaml
 ? Do you want to replace the resource customresourcedefinition/digitalaideploys.xld.digital.ai with specification from file
 digitalai/dai-deploy/digitalai/20240429-190735/kubernetes/template/custom-resource-definition.yaml: Yes
 Applied resource customresourcedefinition/digitalaideploys.xld.digital.ai from the file digitalai/dai-deploy/digitalai/20240429-190735/kubernetes/template/custom-resource-definition.yaml
 Applied resource deployment/xld-operator-controller-manager from the file digitalai/dai-deploy/digitalai/20240429-190735/kubernetes/template/deployment.yaml
-Applied resource role/xld-operator-leader-election from the file digitalai/dai-deploy/digitalai/20240429-190735/kubernetes/template/leader-election-role.yaml
-Applied resource rolebinding/xld-operator-leader-election from the file digitalai/dai-deploy/digitalai/20240429-190735/kubernetes/template/leader-election-rolebinding.yaml
 Applied resource clusterrole/xld-operator-manager from the file digitalai/dai-deploy/digitalai/20240429-190735/kubernetes/template/manager-clusterrole.yaml
 Applied resource clusterrolebinding/xld-operator-manager from the file digitalai/dai-deploy/digitalai/20240429-190735/kubernetes/template/manager-clusterrolebinding.yaml
 Applied resource role/xld-operator-manager from the file digitalai/dai-deploy/digitalai/20240429-190735/kubernetes/template/manager-role.yaml
@@ -857,7 +836,7 @@ xl kube install --skip-prompts --answers digitalai/generated_answers_dai-deploy_
 	| ImageNameDeploy                | xl-deploy                                          |
 	| ImageNameDeployTaskEngine      | deploy-task-engine                                 |
 	| ImageRegistryType              | default                                            |
-	| ImageTag                       | 24.1.0-beta.7                                      |
+	| ImageTag                       | 24.3.2                                             |
 	| IngressHost                    | deploy-ns-yourname.local                           |
 	| IngressKeystoreSource          | generate                                           |
 	| IngressType                    | nginx                                              |
@@ -871,7 +850,7 @@ xl kube install --skip-prompts --answers digitalai/generated_answers_dai-deploy_
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
 	| OperatorImageDeploy            | deploy-operator                                    |
-	| OperatorImageTag               | 24.1.0-beta.7                                      |
+	| OperatorImageTag               | 24.3.2                                             |
 	| OsType                         | linux                                              |
 	| PostgresqlPvcSize              | 1                                                  |
 	| PostgresqlStorageClass         | standard                                           |
@@ -908,11 +887,8 @@ Created keystore digitalai/dai-deploy/digitalai/20240429-194818/kubernetes/repos
 Skip creating namespace digitalai, already exists
 Generated files successfully for PlainK8s installation.
 Applying resources to the cluster!
-Applied resource service/xld-operator-controller-manager-metrics-service from the file digitalai/dai-deploy/digitalai/20240429-194818/kubernetes/template/controller-manager-metrics-service.yaml
 Applied resource customresourcedefinition/digitalaideploys.xld.digital.ai from the file digitalai/dai-deploy/digitalai/20240429-194818/kubernetes/template/custom-resource-definition.yaml
 Applied resource deployment/xld-operator-controller-manager from the file digitalai/dai-deploy/digitalai/20240429-194818/kubernetes/template/deployment.yaml
-Applied resource role/xld-operator-leader-election from the file digitalai/dai-deploy/digitalai/20240429-194818/kubernetes/template/leader-election-role.yaml
-Applied resource rolebinding/xld-operator-leader-election from the file digitalai/dai-deploy/digitalai/20240429-194818/kubernetes/template/leader-election-rolebinding.yaml
 Applied resource clusterrole/xld-operator-manager from the file digitalai/dai-deploy/digitalai/20240429-194818/kubernetes/template/manager-clusterrole.yaml
 Applied resource clusterrolebinding/xld-operator-manager from the file digitalai/dai-deploy/digitalai/20240429-194818/kubernetes/template/manager-clusterrolebinding.yaml
 Applied resource role/xld-operator-manager from the file digitalai/dai-deploy/digitalai/20240429-194818/kubernetes/template/manager-role.yaml
