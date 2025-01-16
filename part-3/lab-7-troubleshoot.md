@@ -7,7 +7,7 @@ We will now try to detect and correct problems that can happen during installati
 
 Do installation with following errors:
 - not existing operator image: xebialabs/deploy-operator:24.3.2
-- wrong storage class on the postgresql PVC, we will use xl-kube-workshop-file-storage-class StorageClass on the Azure, that StorageClass is not providing required block storage 
+- wrong storage class on the postgresql PVC, we will use xl-kube-workshop-file-storage-class StorageClass on the Azure (use other available storage class available on your cluster), that StorageClass is not providing required block storage 
   - on Minikube and Docker Desktop we don't have this option so we will use broken StorageClass called `broken-storage`
 - wrong storage class on the RabbitMQ, we will use broken StorageClass called `broken-storage`
 
@@ -30,7 +30,7 @@ xl kube install
 Following are answers for the Azure. 
 
 For minikube / Docker Desktop choose 'PlainK8s' for K8sSetup and use default storage classes.
-In case of question `? Provide Storage Class to be defined for PostgreSQL: xl-kube-workshop-file-storage-class` for minikube / Docker Desktop choose _broken-storage_.
+In case of question `? Provide Storage Class to be defined for PostgreSQL: xl-kube-workshop-file-storage-class` (or other storage class on cluster) for minikube / Docker Desktop choose other storage class.
 
 ```text
 $ xl kube install
@@ -495,7 +495,7 @@ RabbitmqStorageClass: 'standard'
 
 On minikube and Docker Desktop use default storage class (`standard`)!
 
-On Azure use `xl-kube-workshop-file-storage-class`
+On Azure use `xl-kube-workshop-file-storage-class` (or other available storage class on cluster)
 
 Repeat installation with answers file, but clean before, because storage class cannot be updated on the PVC.
 

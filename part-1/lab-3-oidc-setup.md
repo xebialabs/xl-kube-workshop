@@ -3,7 +3,9 @@
 
 ## Configure authentication on Digital.ai Platform
 
-In this step, we will create an OIDC client that will allow Digital.ai Release to use the authentication service of Digital.ai Platform
+In this step, we will create an OIDC client that will allow Digital.ai Release to use the authentication service of Digital.ai Platform.
+
+If Identity service is not available skip this lab.
 
 ### 1. Obtain access to the staging platform
 

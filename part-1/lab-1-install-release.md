@@ -42,7 +42,7 @@ Before we kick it off, let's get our ducks in a row
   - `release-ns-yourname.local`
   - Also make sure this host name has a entry in /etc/hosts file.
 - On minikube we can use the standard storage class, also the default.  
-- On Azure we use two custom storage classes. They already exist on the cluster:
+- On Azure we use two custom storage classes. They already exist on the cluster (or use the cluster storage classes available on your cluster):
   - `xl-kube-workshop-file-storage-class` based on [Azure Files Dynamic](https://docs.microsoft.com/en-us/azure/aks/azure-files-dynamic-pv)
   - `xl-kube-workshop-disk-storage-class` based on [Azure Disk Dynamic](https://docs.microsoft.com/en-us/azure/aks/azure-disks-dynamic-pv)
   - or other provided classes, it is for Release requirement to use RWX based storage class.

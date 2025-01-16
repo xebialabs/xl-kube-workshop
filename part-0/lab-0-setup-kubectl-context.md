@@ -1,10 +1,6 @@
 
 # Lab 0 - Setup kubectl context
 
-## Slack 
-
-Connect to Slack channel `#xl-kube-workshop`
-
 ## Collect all prerequisites
 
 Check all prerequisites:
@@ -16,15 +12,13 @@ Check all prerequisites:
 - Java 17 - keytool (only if you plan to use the generation of the keystore inside the xl-cli kube)
 - A directory from where you will run `xl kube` commands
 - License files for Release and Deploy (can be generated during installation)
-- Username/password for Identity Server (it will be provided on the Slack channel `#xl-kube-workshop`)
+- Username/password for Identity Server (in case you cannot use IS, skip the labs with IS )
 
 Use one of the following options to get the kubectl context on your machine:
 
 ### With the Azure cluster
 
-Real values of parameters will be provided on the Slack channel `#xl-kube-workshop`.
-
-Run:
+Run (customize the values according to your cluster settings):
 
 ```shell
 export AZURE_USERNAME=...
