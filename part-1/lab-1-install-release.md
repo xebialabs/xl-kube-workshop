@@ -1,5 +1,5 @@
 
-# Lab 1 - Install Digital.ai Release 23.3.2
+# Lab 1 - Install Digital.ai Release 24.3.2
 
 This lab will use `xl kube install` to install Digital.ai Release to the K8s cluster.
 After installation we will check if everything is running properly and then configure the hostname in DNS.
@@ -17,7 +17,7 @@ Throughout this workshop , we will use the new `xl kube` command. It can do the 
 
 To investigate all possible options, please use the `--help` command. For example `xl kube --help`, or `xl kube install --help`. 
 
-Also check [XL Kube Command Reference](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/operator/xl-kube.html) for more details.
+Also check [XL Kube Command Reference](https://docs.digital.ai/release/docs/xl-platform/operator/xl-kube) for more details.
 
 
 ## Installation
@@ -32,7 +32,7 @@ This command will take care of the asking for the relevant configuration using a
 
 Before we kick it off, let's get our ducks in a row
 
-- We are installing 23.3.2 version of Release. Later in the workshop we will upgrade it to 24.1.0
+- We are installing 24.3.2 version of Release. Later in the workshop we will upgrade it to 24.3.3
 - The license files will be provided during the workshop and needs to be saved in the working directory.
 - Both Kubernetes namespace and hostname need to be unique. For this workshop, we will refer to the namespace as `ns-yourname`. Every time you encounter `ns-yourname`, replace it with your own namespace, for example `ns-alice`. The namespace total length needs to be below 12 characters. The namespace will be created during the installation.  
 - When installing on Azure, you will [create a DNS label](https://learn.microsoft.com/en-us/azure/aks/static-ip#apply-a-dns-label-to-the-service) for 
@@ -42,9 +42,10 @@ Before we kick it off, let's get our ducks in a row
   - `release-ns-yourname.local`
   - Also make sure this host name has a entry in /etc/hosts file.
 - On minikube we can use the standard storage class, also the default.  
-- On Azure we use two custom storage classes. They already exist on the cluster:
+- On Azure we use two custom storage classes. They already exist on the cluster (or use the cluster storage classes available on your cluster):
   - `xl-kube-workshop-file-storage-class` based on [Azure Files Dynamic](https://docs.microsoft.com/en-us/azure/aks/azure-files-dynamic-pv)
   - `xl-kube-workshop-disk-storage-class` based on [Azure Disk Dynamic](https://docs.microsoft.com/en-us/azure/aks/azure-disks-dynamic-pv)
+  - or other provided classes, it is for Release requirement to use RWX based storage class.
 
 Now let's get started!
 
@@ -54,7 +55,7 @@ We've marked some of the questions where you need to pay extra attention with a 
 
 In order not to overstretch the cluster during our workshop, please make sure to use a maximum of two Release replicas, and tweak the rest of the resources as indicated below. 
 
-For more details on the questions and answers, check our documentation:  [Installation Wizard for Digital.ai Release](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/operator/xl-op-install-wizard-release.html)
+For more details on the questions and answers, check our documentation:  [Installation Wizard for Digital.ai Release](https://docs.digital.ai/release/docs/xl-platform/operator/xl-op-install-wizard-release)
 
 The following example is for Minikube / Docker Desktop setup. For minikube / Docker Desktop choose 'PlainK8s' for K8sSetup and use default storage classes.
 When using minikube or Docker you can use any host name you want, for example `release-ns-yourname.local`.
@@ -70,7 +71,7 @@ $ xl kube install
 ? Select type of image registry: default [Default (Uses various public image registries for the installation images)]
 ? Enter the repository name for the application and operator images (eg: <repositoryName> from <repositoryName>/<imageName>:<tagName>): xebialabsunsupported
 ? Enter the Release image name (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): xl-release
-⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 23.3.2
+⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.2
 ⚠️? Select source of the license: generate [Generate the license (accepting EULA, this is only for temporary license)]
 ⚠️? Enter the release server replica count: 2
 ⚠️? Enter PVC size for Release (Gi): 1
@@ -82,7 +83,7 @@ $ xl kube install
 ? Provide administrator password: PQCWFYRK2I7HM3rI
 ? Type of the OIDC configuration: no-oidc [No OIDC Configuration]
 ? Enter the operator image to use (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): release-operator
-⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 23.3.2
+⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.2
 ? Select source of the repository keystore: generate [Generate the repository keystore during installation (you need to have keytool utility installed in your path)]
 ? Provide keystore passphrase: v1Btc6GSTd33Hb2Z
 ⚠️? Provide storage class for the server: standard
@@ -109,7 +110,7 @@ $ xl kube install
 	| Http2EnabledRelease            | false                                              |
 	| ImageNameRelease               | xl-release                                         |
 	| ImageRegistryType              | default                                            |
-	| ImageTag                       | 23.3.2                                             |
+	| ImageTag                       | 24.3.2                                             |
 	| IngressHost                    | release-ns-yourname.local                          |
 	| IngressType                    | nginx                                              |
 	| IngressTypeGeneric             | nginx                                              |
@@ -123,7 +124,7 @@ $ xl kube install
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
 	| OperatorImageRelease           | release-operator                                   |
-	| OperatorImageTag               | 23.3.2                                             |
+	| OperatorImageTag               | 24.3.2                                             |
 	| OsType                         | darwin                                             |
 	| PostgresqlPvcSize              | 1                                                  |
 	| PostgresqlStorageClass         | standard                                           |
@@ -202,11 +203,8 @@ digitalai/dai-release/ns-yourname/20240105-125343/kubernetes/template/custom-res
 You will now see the list of all files being applied.
 
 ```
-Applied resource service/xlr-operator-controller-manager-metrics-service from the file digitalai/dai-release/ns-yourname/20240105-125343/kubernetes/template/controller-manager-metrics-service.yaml
 Applied resource customresourcedefinition/digitalaireleases.xlr.digital.ai from the file digitalai/dai-release/ns-yourname/20240105-125343/kubernetes/template/custom-resource-definition.yaml
 Applied resource deployment/xlr-operator-controller-manager from the file digitalai/dai-release/ns-yourname/20240105-125343/kubernetes/template/deployment.yaml
-Applied resource role/xlr-operator-leader-election from the file digitalai/dai-release/ns-yourname/20240105-125343/kubernetes/template/leader-election-role.yaml
-Applied resource rolebinding/xlr-operator-leader-election from the file digitalai/dai-release/ns-yourname/20240105-125343/kubernetes/template/leader-election-rolebinding.yaml
 Applied resource clusterrole/ns-yourname-xlr-operator-manager from the file digitalai/dai-release/ns-yourname/20240105-125343/kubernetes/template/manager-clusterrole.yaml
 Applied resource clusterrolebinding/ns-yourname-xlr-operator-manager from the file digitalai/dai-release/ns-yourname/20240105-125343/kubernetes/template/manager-clusterrolebinding.yaml
 Applied resource role/xlr-operator-manager from the file digitalai/dai-release/ns-yourname/20240105-125343/kubernetes/template/manager-role.yaml
@@ -318,7 +316,7 @@ If you forgot the password, you can get it with the command from the helm info (
 kubectl get secret --namespace ns-yourname dai-xlr-ns-yourname-digitalai-release -o jsonpath="{.data.releasePassword}" | base64 --decode; echo
 ```
 
-Check the version in **(Gear icon) > About Digital.ai Release**. We should be running **Version 23.3.2**
+Check the version in **(Gear icon) > About Digital.ai Release**. We should be running **Version 24.3.2**
 
 ## Set up DNS on Azure
 
@@ -363,7 +361,7 @@ Note: The browser will warn that the site is not secure because of the certifica
 
 When using a local kube cluster, we need to edit the local `hosts` file and add your host name here.
 
-The procedure is slightly different for Unix and Windows. For more detailed instructions than the ones below, see [How to Edit Your Hosts File on Windows, Mac, or Linux](https://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/)
+The procedure is slightly different for Unix and Windows. For more detailed instructions than the ones below, see [How to Edit Your Hosts File on Windows, Mac, or Linux](https://www.howtogeek.com/27350/beginner-geek-how-to-edit-your-hosts-file/)
 
 For Docker Desktop, after adding the changes to the `hosts` file, go to [http://release-ns-yourname.local](http://release-ns-yourname.local) or for HTTPS [https://release-ns-yourname.local](https://release-ns-yourname.local)
 
@@ -395,7 +393,7 @@ There are multiple ways to access the application on minikube. Check following d
 
 When using a local kube cluster, we need to edit the local `hosts` file and add your host name here.
 
-The procedure is slightly different for Unix and Windows. For more detailed instructions than the ones below, see [How to Edit Your Hosts File on Windows, Mac, or Linux](https://www.howtogeek.com/howto/27350/beginner-geek-how-to-edit-your-hosts-file/)
+The procedure is slightly different for Unix and Windows. For more detailed instructions than the ones below, see [How to Edit Your Hosts File on Windows, Mac, or Linux](https://www.howtogeek.com/27350/beginner-geek-how-to-edit-your-hosts-file/)
 
 Configure the `hosts` file.
 

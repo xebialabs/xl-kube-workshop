@@ -25,17 +25,17 @@ When using minikube or Docker you can use any host name you want, for example `d
 
 Questions for license, storage class and hostname will be similar as for Release in the previous exercises. Make sure you use the Deploy license!
 
-For the other questions and answers details check [Installation Wizard for Digital.ai Deploy](https://docs.digital.ai/bundle/devops-deploy-version-v.24.1/page/deploy/operator/xl-op-install-wizard-deploy.html)
+For the other questions and answers details check [Installation Wizard for Digital.ai Deploy](https://docs.digital.ai/deploy/docs/xl-platform/operator/xl-op-install-wizard-deploy)
 
-For the list of required images check [Prerequisite images for airgapped install](https://docs.digital.ai/bundle/devops-deploy-version-v.24.1/page/deploy/operator/xl-op-deploy-airgapped-install.html)
+For the list of required images check [Prerequisite images for airgapped install](https://docs.digital.ai/deploy/docs/xl-platform/operator/xl-op-setup-custom-image-registry)
 
 ## Installation on Azure with private image registry
 
 Download the blueprints for the current version:
-[https://nexus.xebialabs.com/nexus/content/repositories/digitalai-public/ai/digital/xlclient/blueprints/xl-op-blueprints/24.1.0-1226.113/xl-op-blueprints-24.1.0-1226.113.zip](https://nexus.xebialabs.com/nexus/content/repositories/digitalai-public/ai/digital/xlclient/blueprints/xl-op-blueprints/24.1.0-1226.113/xl-op-blueprints-24.1.0-1226.113.zip).
+[https://nexus.xebialabs.com/nexus/content/repositories/digitalai-public/ai/digital/xlclient/blueprints/xl-op-blueprints/24.3.2/xl-op-blueprints-24.3.2.zip](https://nexus.xebialabs.com/nexus/content/repositories/digitalai-public/ai/digital/xlclient/blueprints/xl-op-blueprints/24.3.2/xl-op-blueprints-24.3.2.zip).
 
 
-Unzip the `xl-op-blueprints-24.10-1226.113.zip` to the `xl-op-blueprints` directory in your working directory. You can now use it with the `--local-repo` flag.
+Unzip the `xl-op-blueprints-24.3.2.zip` to the `xl-op-blueprints` directory in your working directory. You can now use it with the `--local-repo` flag.
 
 ### Updating the image repository
 
@@ -123,7 +123,7 @@ Push all the prerequisite images (see link in general instructions above) to the
 ⚠️? Enter the custom docker image registry name (eg: <imageRegistryName> from <imageRegistryName>/<repositoryName>/<imageName>:<tagName>): localhost:5000
 ? Enter the repository name for the application and operator images (eg: <repositoryName> from <repositoryName>/<imageName>:<tagName>): xebialabsunsupported
 ? Enter the Deploy server image name (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): xl-deploy
-⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.1.0-1226.113
+⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.2
 ? Enter the deploy task engine image name for version 22 and above (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): deploy-task-engine
 ? Enter the central configuration image name for version 22 and above (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): central-configuration
 ? Select source of the license: generate [Generate the license (accepting EULA, this is only for temporary license)]
@@ -138,7 +138,7 @@ Push all the prerequisite images (see link in general instructions above) to the
 ? Provide administrator password: GOtujGAU2U6XBcR7
 ? Type of the OIDC configuration: no-oidc [No OIDC Configuration]
 ? Enter the operator image to use (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): deploy-operator
-⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.1.0-1226.113
+⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.2
 ? Select source of the repository keystore: generate [Generate the repository keystore during installation (you need to have keytool utility installed in your path)]
 ? Provide keystore passphrase: L5uEqIfNXag0gtL2
 ? Provide storage class for the server: standard
@@ -165,7 +165,7 @@ Push all the prerequisite images (see link in general instructions above) to the
 	| ImageNameDeploy                | xl-deploy                                          |
 	| ImageNameDeployTaskEngine      | deploy-task-engine                                 |
 	| ImageRegistryType              | public                                             |
-	| ImageTag                       | 24.1.0-1226.113                                    |
+	| ImageTag                       | 24.3.2                                             |
 	| IngressHost                    | deploy-ns-yourname.local                           |
 	| IngressType                    | nginx                                              |
 	| IngressTypeGeneric             | nginx                                              |
@@ -179,21 +179,16 @@ Push all the prerequisite images (see link in general instructions above) to the
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
 	| OperatorImageDeploy            | deploy-operator                                    |
-	| OperatorImageTag               | 24.1.0-1226.113                                    |
+	| OperatorImageTag               | 24.3.2                                             |
 	| OsType                         | darwin                                             |
 	| PostgresqlPvcSize              | 1                                                  |
 	| PostgresqlStorageClass         | standard                                           |
 	| ProcessType                    | install                                            |
-	| PvcSizeDeploy                  | 1                                                 |
-	| PvcSizeDeployTaskEngine        | 1                                                 |
+	| PvcSizeDeploy                  | 1                                                  |
+	| PvcSizeDeployTaskEngine        | 1                                                  |
 	| RabbitmqPvcSize                | 1                                                  |
 	| RabbitmqReplicaCount           | 1                                                  |
 	| RabbitmqStorageClass           | standard                                           |
-	| RemoteRunnerGeneration         | false                                              |
-	| RemoteRunnerInstall            | false                                              |
-	| RemoteRunnerInstallConfirm     | false                                              |
-	| RemoteRunnerReleaseName        | remote-runner                                      |
-	| RemoteRunnerUseDefaultLocation | true                                               |
 	| RepositoryKeystoreSource       | generate                                           |
 	| RepositoryName                 | xebialabsunsupported                               |
 	| ServerType                     | dai-deploy                                         |

@@ -46,11 +46,6 @@ $ xl kube clean
 	| OsType                         | darwin                                             |
 	| PreservePvc                    | false                                              |
 	| ProcessType                    | clean                                              |
-	| RemoteRunnerGeneration         | false                                              |
-	| RemoteRunnerInstall            | false                                              |
-	| RemoteRunnerInstallConfirm     | false                                              |
-	| RemoteRunnerReleaseName        | remote-runner                                      |
-	| RemoteRunnerUseDefaultLocation | true                                               |
 	| ServerType                     | dai-deploy                                         |
 	| ShortServerName                | xld                                                |
 	| UseCustomNamespace             | true                                               |
@@ -76,8 +71,6 @@ Deleting deployments
 Deleted deployment/xld-operator-controller-manager from namespace ns-yourname
 Deleting jobs
 Deleting services
-? Do you want to delete the resource svc/xld-operator-controller-manager-metrics-service: Yes
-Deleted svc/xld-operator-controller-manager-metrics-service from namespace ns-yourname
 Deleting secrets
 ? Do you want to delete the resource secret/dai-xld-ns-yourname-digitalai-deploy-license: Yes
 Deleted secret/dai-xld-ns-yourname-digitalai-deploy-license from namespace ns-yourname
@@ -87,22 +80,14 @@ Deleted configmap/xld-operator-controller-manager from namespace ns-yourname
 ? Do you want to delete the resource ingressclass/nginx-dai-xld-ns-yourname: Yes
 Deleted ingressclass/nginx-dai-xld-ns-yourname from namespace ns-yourname
 Deleting roles
-? Do you want to delete the resource role/xld-operator-leader-election: Yes
-Deleted role/xld-operator-leader-election from namespace ns-yourname
 ? Do you want to delete the resource role/xld-operator-manager: Yes
 Deleted role/xld-operator-manager from namespace ns-yourname
-? Do you want to delete the resource role/xld-operator-proxy: Yes
-Deleted role/xld-operator-proxy from namespace ns-yourname
 ? Do you want to delete the resource clusterrole/dai-xld-ns-yourname-nginx-ingress-controller: Yes
 Deleted clusterrole/dai-xld-ns-yourname-nginx-ingress-controller from namespace ns-yourname
 ? Do you want to delete the resource clusterrole/ns-yourname-xld-operator-manager: Yes
 Deleted clusterrole/ns-yourname-xld-operator-manager from namespace ns-yourname
-? Do you want to delete the resource rolebinding/xld-operator-leader-election: Yes
-Deleted rolebinding/xld-operator-leader-election from namespace ns-yourname
 ? Do you want to delete the resource rolebinding/xld-operator-manager: Yes
 Deleted rolebinding/xld-operator-manager from namespace ns-yourname
-? Do you want to delete the resource rolebinding/xld-operator-proxy: Yes
-Deleted rolebinding/xld-operator-proxy from namespace ns-yourname
 ? Do you want to delete the resource clusterrolebinding/dai-xld-ns-yourname-nginx-ingress-controller: Yes
 Deleted clusterrolebinding/dai-xld-ns-yourname-nginx-ingress-controller from namespace ns-yourname
 ? Do you want to delete the resource clusterrolebinding/ns-yourname-xld-operator-manager: Yes
@@ -126,7 +111,7 @@ Clean finished successfully!
 
 The clean process is cleaning everything from the cluster. For each resource it is asking for confirmation before delete.
 
-For the other questions and answers details check [XL Kube Command Reference](https://docs.digital.ai/bundle/devops-deploy-version-v.24.1/page/deploy/operator/xl-kube.html#xl-kube-clean)
+For the other questions and answers details check [XL Kube Command Reference](https://docs.digital.ai/deploy/docs/xl-platform/operator/xl-kube#xl-kube-clean)
 
 ---
 

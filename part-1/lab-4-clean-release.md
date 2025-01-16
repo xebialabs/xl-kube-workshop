@@ -68,8 +68,6 @@ Deleting deployments
 Deleted deployment/xlr-operator-controller-manager from namespace ns-yourname
 Deleting jobs
 Deleting services
-? Do you want to delete the resource svc/xlr-operator-controller-manager-metrics-service: Yes
-Deleted svc/xlr-operator-controller-manager-metrics-service from namespace ns-yourname
 Deleting secrets
 ? Do you want to delete the resource secret/dai-xlr-ns-yourname-digitalai-release-license: Yes
 Deleted secret/dai-xlr-ns-yourname-digitalai-release-license from namespace ns-yourname
@@ -77,20 +75,12 @@ Deleting configmaps
 ? Do you want to delete the resource configmap/xlr-operator-controller-manager: Yes
 Deleted configmap/xlr-operator-controller-manager from namespace ns-yourname
 Deleting roles
-? Do you want to delete the resource role/xlr-operator-leader-election: Yes
-Deleted role/xlr-operator-leader-election from namespace ns-yourname
 ? Do you want to delete the resource role/xlr-operator-manager: Yes
 Deleted role/xlr-operator-manager from namespace ns-yourname
-? Do you want to delete the resource role/xlr-operator-proxy: Yes
-Deleted role/xlr-operator-proxy from namespace ns-yourname
 ? Do you want to delete the resource clusterrole/ns-yourname-xlr-operator-manager: Yes
 Deleted clusterrole/ns-yourname-xlr-operator-manager from namespace ns-yourname
-? Do you want to delete the resource rolebinding/xlr-operator-leader-election: Yes
-Deleted rolebinding/xlr-operator-leader-election from namespace ns-yourname
 ? Do you want to delete the resource rolebinding/xlr-operator-manager: Yes
 Deleted rolebinding/xlr-operator-manager from namespace ns-yourname
-? Do you want to delete the resource rolebinding/xlr-operator-proxy: Yes
-Deleted rolebinding/xlr-operator-proxy from namespace ns-yourname
 ? Do you want to delete the resource clusterrolebinding/ns-yourname-xlr-operator-manager: Yes
 Deleted clusterrolebinding/ns-yourname-xlr-operator-manager from namespace ns-yourname
 Deleting PVCs
@@ -110,7 +100,7 @@ Clean finished successfully!
 
 The clean process is cleaning everything from the cluster. 
 
-For the other questions and answers details check [XL Kube Command Reference](https://docs.digital.ai/bundle/devops-release-version-v.24.1/page/release/operator/xl-kube.html#xl-kube-clean)
+For the other questions and answers details check [XL Kube Command Reference](https://docs.digital.ai/release/docs/xl-platform/operator/xl-kube#xl-kube-clean)
 
 ---
 

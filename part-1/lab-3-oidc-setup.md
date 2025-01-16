@@ -3,11 +3,12 @@
 
 ## Configure authentication on Digital.ai Platform
 
-In this step, we will create an OIDC client that will allow Digital.ai Release to use the authentication service of Digital.ai Platform
+In this step, we will create an OIDC client that will allow Digital.ai Release to use the authentication service of Digital.ai Platform.
+
+If Identity service is not available skip this lab.
 
 ### 1. Obtain access to the staging platform
 
-~~Go to Digital.ai Platform at [https://devops-demo.staging.digital.ai/](https://devops-demo.staging.digital.ai/).~~ (deprecated)  
 Contact your Digital.ai representative for access credentials
 
 ### Create the OIDC client
@@ -28,7 +29,6 @@ Open a text editor with the snippet below and paste the values in there. Also ad
 ```yaml
 oidc:
   enabled: true
-  external: true
   clientId: "[[YOUR CLIENT ID HERE]]"
   clientSecret: "[[YOUR CLIENT SECRET HERE]]"
   issuer: "https://identity-01.staging.digital.ai/auth/realms/[[YOUR REALM HERE]]"
@@ -52,7 +52,6 @@ Find the `oidc` section. It should look like this:
 ```text
   oidc:
     enabled: false
-    external: false
 ```
 
 Now replace it with the snippet you created above and save the file. 

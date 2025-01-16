@@ -51,7 +51,16 @@ Here we will update the configuration file on the central configuration server.
      --type=merge --patch-file $FILE_TO_UPDATE.patch.yaml
    ```
    
-   The pods will now restart, after which we should be able to see our changes in the containers.
+   The pods will now restart central configuration pod, after which we should be able to see our changes in the container.
+
+5. Restart master and worker Deploy pods, by deleting statefulsets
+
+    ```shell
+    kubectl delete sts dai-xld-ns-yourname-digitalai-deploy-master
+    kubectl delete sts dai-xld-ns-yourname-digitalai-deploy-worker
+    ```
+    
+    The pods will now restart with the new configuration.
 
 ---
 
