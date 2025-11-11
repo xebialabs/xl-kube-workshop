@@ -32,10 +32,10 @@ For the list of required images check [Prerequisite images for airgapped install
 ## Installation on Azure with private image registry
 
 Download the blueprints for the current version:
-[https://nexus.xebialabs.com/nexus/content/repositories/digitalai-public/ai/digital/xlclient/blueprints/xl-op-blueprints/24.3.2/xl-op-blueprints-24.3.2.zip](https://nexus.xebialabs.com/nexus/content/repositories/digitalai-public/ai/digital/xlclient/blueprints/xl-op-blueprints/24.3.2/xl-op-blueprints-24.3.2.zip).
+[https://nexus.xebialabs.com/nexus/content/repositories/digitalai-public/ai/digital/xlclient/blueprints/xl-op-blueprints/25.3.0/xl-op-blueprints-25.3.0.zip](https://nexus.xebialabs.com/nexus/content/repositories/digitalai-public/ai/digital/xlclient/blueprints/xl-op-blueprints/25.3.0/xl-op-blueprints-25.3.0.zip).
 
 
-Unzip the `xl-op-blueprints-24.3.2.zip` to the `xl-op-blueprints` directory in your working directory. You can now use it with the `--local-repo` flag.
+Unzip the `xl-op-blueprints-25.3.0.zip` to the `xl-op-blueprints` directory in your working directory. You can now use it with the `--local-repo` flag.
 
 ### Updating the image repository
 
@@ -123,7 +123,7 @@ Push all the prerequisite images (see link in general instructions above) to the
 ⚠️? Enter the custom docker image registry name (eg: <imageRegistryName> from <imageRegistryName>/<repositoryName>/<imageName>:<tagName>): localhost:5000
 ? Enter the repository name for the application and operator images (eg: <repositoryName> from <repositoryName>/<imageName>:<tagName>): xebialabsunsupported
 ? Enter the Deploy server image name (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): xl-deploy
-⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.2
+⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 25.3.0
 ? Enter the deploy task engine image name for version 22 and above (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): deploy-task-engine
 ? Enter the central configuration image name for version 22 and above (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): central-configuration
 ? Select source of the license: generate [Generate the license (accepting EULA, this is only for temporary license)]
@@ -138,7 +138,7 @@ Push all the prerequisite images (see link in general instructions above) to the
 ? Provide administrator password: GOtujGAU2U6XBcR7
 ? Type of the OIDC configuration: no-oidc [No OIDC Configuration]
 ? Enter the operator image to use (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): deploy-operator
-⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.2
+⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 25.3.0
 ? Select source of the repository keystore: generate [Generate the repository keystore during installation (you need to have keytool utility installed in your path)]
 ? Provide keystore passphrase: L5uEqIfNXag0gtL2
 ? Provide storage class for the server: standard
@@ -165,7 +165,7 @@ Push all the prerequisite images (see link in general instructions above) to the
 	| ImageNameDeploy                | xl-deploy                                          |
 	| ImageNameDeployTaskEngine      | deploy-task-engine                                 |
 	| ImageRegistryType              | public                                             |
-	| ImageTag                       | 24.3.2                                             |
+	| ImageTag                       | 25.3.0                                             |
 	| IngressHost                    | deploy-ns-yourname.local                           |
 	| IngressType                    | nginx                                              |
 	| IngressTypeGeneric             | nginx                                              |
@@ -179,7 +179,7 @@ Push all the prerequisite images (see link in general instructions above) to the
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
 	| OperatorImageDeploy            | deploy-operator                                    |
-	| OperatorImageTag               | 24.3.2                                             |
+	| OperatorImageTag               | 25.3.0                                             |
 	| OsType                         | darwin                                             |
 	| PostgresqlPvcSize              | 1                                                  |
 	| PostgresqlStorageClass         | standard                                           |

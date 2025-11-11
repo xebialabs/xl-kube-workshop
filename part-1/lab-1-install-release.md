@@ -1,5 +1,5 @@
 
-# Lab 1 - Install Digital.ai Release 24.3.2
+# Lab 1 - Install Digital.ai Release 25.3.0
 
 This lab will use `xl kube install` to install Digital.ai Release to the K8s cluster.
 After installation we will check if everything is running properly and then configure the hostname in DNS.
@@ -32,7 +32,7 @@ This command will take care of the asking for the relevant configuration using a
 
 Before we kick it off, let's get our ducks in a row
 
-- We are installing 24.3.2 version of Release. Later in the workshop we will upgrade it to 24.3.3
+- We are installing 25.3.0 version of Release. Later in the workshop we will upgrade it to 25.3.x
 - The license files will be provided during the workshop and needs to be saved in the working directory.
 - Both Kubernetes namespace and hostname need to be unique. For this workshop, we will refer to the namespace as `ns-yourname`. Every time you encounter `ns-yourname`, replace it with your own namespace, for example `ns-alice`. The namespace total length needs to be below 12 characters. The namespace will be created during the installation.  
 - When installing on Azure, you will [create a DNS label](https://learn.microsoft.com/en-us/azure/aks/static-ip#apply-a-dns-label-to-the-service) for 
@@ -71,7 +71,7 @@ $ xl kube install
 ? Select type of image registry: default [Default (Uses various public image registries for the installation images)]
 ? Enter the repository name for the application and operator images (eg: <repositoryName> from <repositoryName>/<imageName>:<tagName>): xebialabsunsupported
 ? Enter the Release image name (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): xl-release
-⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.2
+⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 25.3.0
 ⚠️? Select source of the license: generate [Generate the license (accepting EULA, this is only for temporary license)]
 ⚠️? Enter the release server replica count: 2
 ⚠️? Enter PVC size for Release (Gi): 1
@@ -83,7 +83,7 @@ $ xl kube install
 ? Provide administrator password: PQCWFYRK2I7HM3rI
 ? Type of the OIDC configuration: no-oidc [No OIDC Configuration]
 ? Enter the operator image to use (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): release-operator
-⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.2
+⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 25.3.0
 ? Select source of the repository keystore: generate [Generate the repository keystore during installation (you need to have keytool utility installed in your path)]
 ? Provide keystore passphrase: v1Btc6GSTd33Hb2Z
 ⚠️? Provide storage class for the server: standard
@@ -110,7 +110,7 @@ $ xl kube install
 	| Http2EnabledRelease            | false                                              |
 	| ImageNameRelease               | xl-release                                         |
 	| ImageRegistryType              | default                                            |
-	| ImageTag                       | 24.3.2                                             |
+	| ImageTag                       | 25.3.0                                             |
 	| IngressHost                    | release-ns-yourname.local                          |
 	| IngressType                    | nginx                                              |
 	| IngressTypeGeneric             | nginx                                              |
@@ -124,7 +124,7 @@ $ xl kube install
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
 	| OperatorImageRelease           | release-operator                                   |
-	| OperatorImageTag               | 24.3.2                                             |
+	| OperatorImageTag               | 25.3.0                                             |
 	| OsType                         | darwin                                             |
 	| PostgresqlPvcSize              | 1                                                  |
 	| PostgresqlStorageClass         | standard                                           |
@@ -316,7 +316,7 @@ If you forgot the password, you can get it with the command from the helm info (
 kubectl get secret --namespace ns-yourname dai-xlr-ns-yourname-digitalai-release -o jsonpath="{.data.releasePassword}" | base64 --decode; echo
 ```
 
-Check the version in **(Gear icon) > About Digital.ai Release**. We should be running **Version 24.3.2**
+Check the version in **(Gear icon) > About Digital.ai Release**. We should be running **Version 25.3.0**
 
 ## Set up DNS on Azure
 
