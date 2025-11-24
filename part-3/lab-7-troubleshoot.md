@@ -6,7 +6,7 @@ We will now try to detect and correct problems that can happen during installati
 ## Installation with few errors
 
 Do installation with following errors:
-- not existing operator image: xebialabs/deploy-operator:24.3.2
+- not existing operator image: xebialabs/deploy-operator:25.3.0
 - wrong storage class on the postgresql PVC, we will use xl-kube-workshop-file-storage-class StorageClass on the Azure (use other available storage class available on your cluster), that StorageClass is not providing required block storage 
   - on Minikube and Docker Desktop we don't have this option so we will use broken StorageClass called `broken-storage`
 - wrong storage class on the RabbitMQ, we will use broken StorageClass called `broken-storage`
@@ -41,7 +41,7 @@ $ xl kube install
 ? Select type of image registry: default [Default (Uses various public image registries for the installation images)]
 ? Enter the repository name for the application and operator images (eg: <repositoryName> from <repositoryName>/<imageName>:<tagName>): xebialabsunsupported
 ? Enter the Deploy server image name (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): xl-deploy
-? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.2
+? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 25.3.0
 ? Enter the deploy task engine image name for version 22 and above (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): deploy-task-engine
 ? Enter the central configuration image name for version 22 and above (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): central-configuration
 ? Select source of the license: generate [Generate the license (accepting EULA, this is only for temporary license)]
@@ -57,7 +57,7 @@ $ xl kube install
 ? Provide administrator password: C9KOewb2Yr4Ujy7c
 ? Type of the OIDC configuration: no-oidc [No OIDC Configuration]
 ? Enter the operator image to use (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): deploy-operator
-? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.2
+? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 25.3.0
 ? Select source of the repository keystore: generate [Generate the repository keystore during installation (you need to have keytool utility installed in your path)]
 ? Provide repository keystore passphrase: IwZZ3X9DtMfmwxdF
 ? Provide storage class for the server: standard
@@ -85,7 +85,7 @@ $ xl kube install
 	| ImageNameDeploy                | xl-deploy                                          |
 	| ImageNameDeployTaskEngine      | deploy-task-engine                                 |
 	| ImageRegistryType              | default                                            |
-	| ImageTag                       | 24.3.2                                             |
+	| ImageTag                       | 25.3.0                                             |
 	| IngressHost                    | deploy-ns-yourname.local                           |
 	| IngressKeystoreSource          | generate                                           |
 	| IngressType                    | nginx                                              |
@@ -99,7 +99,7 @@ $ xl kube install
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
 	| OperatorImageDeploy            | deploy-operator                                    |
-	| OperatorImageTag               | 24.3.2                                             |
+	| OperatorImageTag               | 25.3.0                                             |
 	| OsType                         | linux                                              |
 	| PostgresqlPvcSize              | 1                                                  |
 	| PostgresqlStorageClass         | broken-storage                                     |
@@ -245,25 +245,25 @@ Events:
   Normal   Created    11m                  kubelet            Created container kube-rbac-proxy
   Normal   Started    11m                  kubelet            Started container kube-rbac-proxy
   Warning  Failed     10m (x4 over 11m)    kubelet            Error: ImagePullBackOff
-  Normal   Pulling    9m51s (x4 over 11m)  kubelet            Pulling image "docker.io/xebialabsunsupported/deploy-operator:24.3.2"
-  Warning  Failed     9m49s (x4 over 11m)  kubelet            Failed to pull image "docker.io/xebialabsunsupported/deploy-operator:24.3.2": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/xebialabsunsupported/deploy-operator:24.3.2": failed to resolve reference "docker.io/xebialabsunsupported/deploy-operator:24.3.2": docker.io/xebialabsunsupported/deploy-operator:24.3.2: not found
+  Normal   Pulling    9m51s (x4 over 11m)  kubelet            Pulling image "docker.io/xebialabsunsupported/deploy-operator:25.3.0"
+  Warning  Failed     9m49s (x4 over 11m)  kubelet            Failed to pull image "docker.io/xebialabsunsupported/deploy-operator:25.3.0": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/xebialabsunsupported/deploy-operator:25.3.0": failed to resolve reference "docker.io/xebialabsunsupported/deploy-operator:25.3.0": docker.io/xebialabsunsupported/deploy-operator:25.3.0: not found
   Warning  Failed     9m49s (x4 over 11m)  kubelet            Error: ErrImagePull
-  Normal   BackOff    80s (x41 over 11m)   kubelet            Back-off pulling image "docker.io/xebialabsunsupported/deploy-operator:24.3.2"
+  Normal   BackOff    80s (x41 over 11m)   kubelet            Back-off pulling image "docker.io/xebialabsunsupported/deploy-operator:25.3.0"
 ```
 
-The events have reason of the failure: `Failed to pull image "docker.io/xebialabsunsupported/deploy-operator:24.3.2": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/xebialabsunsupported/deploy-operator:24.3.2": failed to resolve reference "docker.io/xebialabsunsupported/deploy-operator:24.3.2": docker.io/xebialabsunsupported/deploy-operator:24.3.2: not found`.
+The events have reason of the failure: `Failed to pull image "docker.io/xebialabsunsupported/deploy-operator:25.3.0": rpc error: code = NotFound desc = failed to pull and unpack image "docker.io/xebialabsunsupported/deploy-operator:25.3.0": failed to resolve reference "docker.io/xebialabsunsupported/deploy-operator:25.3.0": docker.io/xebialabsunsupported/deploy-operator:25.3.0: not found`.
 
 Ok, we can fix that by editing answers file from previous installation and run same installation again.
 We edit the digitalai/generated_answers_dai-deploy_digitalai_install-20240429-173358.yaml and change the line from:
 
 ```
-OperatorImageTag: 24.3.2
+OperatorImageTag: 25.3.0
 ```
 
 to
 
 ```
-OperatorImageTag: 24.3.2
+OperatorImageTag: 25.3.0
 ```
 
 Repeat installation with answers file
@@ -292,7 +292,7 @@ $ xl kube install --answers digitalai/generated_answers_dai-deploy_digitalai_ins
 	| ImageNameDeploy                | xl-deploy                                          |
 	| ImageNameDeployTaskEngine      | deploy-task-engine                                 |
 	| ImageRegistryType              | default                                            |
-	| ImageTag                       | 24.3.2                                             |
+	| ImageTag                       | 25.3.0                                             |
 	| IngressHost                    | deploy-ns-yourname.local                           |
 	| IngressKeystoreSource          | generate                                           |
 	| IngressType                    | nginx                                              |
@@ -306,7 +306,7 @@ $ xl kube install --answers digitalai/generated_answers_dai-deploy_digitalai_ins
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
 	| OperatorImageDeploy            | deploy-operator                                    |
-	| OperatorImageTag               | 24.3.2                                             |
+	| OperatorImageTag               | 25.3.0                                             |
 	| OsType                         | linux                                              |
 	| PostgresqlPvcSize              | 1                                                  |
 	| PostgresqlStorageClass         | broken-storage                                     |
@@ -541,7 +541,7 @@ xl kube install --clean-before --skip-prompts --answers digitalai/generated_answ
 	| ImageNameDeploy                | xl-deploy                                          |
 	| ImageNameDeployTaskEngine      | deploy-task-engine                                 |
 	| ImageRegistryType              | default                                            |
-	| ImageTag                       | 24.3.2                                             |
+	| ImageTag                       | 25.3.0                                             |
 	| IngressHost                    | deploy-ns-yourname.local                           |
 	| IngressKeystoreSource          | generate                                           |
 	| IngressType                    | nginx                                              |
@@ -556,7 +556,7 @@ xl kube install --clean-before --skip-prompts --answers digitalai/generated_answ
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
 	| OperatorImageDeploy            | deploy-operator                                    |
-	| OperatorImageTag               | 24.3.2                                             |
+	| OperatorImageTag               | 25.3.0                                             |
 	| OsType                         | linux                                              |
 	| PostgresqlPvcSize              | 1                                                  |
 	| PostgresqlStorageClass         | broken-storage                                     |
@@ -836,7 +836,7 @@ xl kube install --skip-prompts --answers digitalai/generated_answers_dai-deploy_
 	| ImageNameDeploy                | xl-deploy                                          |
 	| ImageNameDeployTaskEngine      | deploy-task-engine                                 |
 	| ImageRegistryType              | default                                            |
-	| ImageTag                       | 24.3.2                                             |
+	| ImageTag                       | 25.3.0                                             |
 	| IngressHost                    | deploy-ns-yourname.local                           |
 	| IngressKeystoreSource          | generate                                           |
 	| IngressType                    | nginx                                              |
@@ -850,7 +850,7 @@ xl kube install --skip-prompts --answers digitalai/generated_answers_dai-deploy_
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeInstall          | no-oidc                                            |
 	| OperatorImageDeploy            | deploy-operator                                    |
-	| OperatorImageTag               | 24.3.2                                             |
+	| OperatorImageTag               | 25.3.0                                             |
 	| OsType                         | linux                                              |
 	| PostgresqlPvcSize              | 1                                                  |
 	| PostgresqlStorageClass         | standard                                           |

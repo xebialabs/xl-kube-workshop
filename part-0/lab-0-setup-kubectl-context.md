@@ -6,7 +6,7 @@
 Check all prerequisites:
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- [xl-cli 24.3.x](https://dist.xebialabs.com/public/xl-cli/24.3.2/)
+- [xl-cli 25.3.x](https://dist.xebialabs.com/public/xl-cli/25.3.0/)
   - [Install the XL CLI](https://docs.digital.ai/release/docs/xl-platform/operator/xl-kube)
 - [yq](https://github.com/mikefarah/yq)
 - Java 17 - keytool (only if you plan to use the generation of the keystore inside the xl-cli kube)
@@ -90,7 +90,7 @@ Server Version: version.Info{Major:"1", Minor:"30", GitVersion:"v1.30.x", ...}
 
 ## Check `xl` command
 
-The `xl`command version 24.3.x should be in the path. Check this with the following command:
+The `xl`command version 25.3.x should be in the path. Check this with the following command:
 
 ```shell
 xl version
@@ -100,13 +100,13 @@ Example of the response on linux:
 
 ```text
 $ xl version
-CLI version:             24.3.2
-Git version:             v24.3.1-0-g946951e
+CLI version:             25.3.0-1017.349
+Git version:             v25.3.0-930.1244-0-g749b710-dirty
 Deploy API version:      xl-deploy/v1
 Release API version:     xl-release/v1
-Git commit:              946951e4d6fc9cbd8e9ce3cd79b7f0e466f3b0a1
-Build date:              2024-11-27T04:32:48.298Z
-GO version:              go1.21.8
+Git commit:              749b71085b31d287c22d6303e2dad448dbe4ca92
+Build date:              2025-10-17T03:25:44.078Z
+GO version:              go1.25.1
 OS/Arch:                 linux/amd64
 ```
 

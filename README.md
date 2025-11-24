@@ -5,7 +5,7 @@ Workshop for installing Digital.ai Release and Digital.ai Deploy on a Kubernetes
 ## Prerequisites
 
 - [kubectl](https://kubernetes.io/docs/tasks/tools/)
-- [xl-cli 24.3.2](https://dist.xebialabs.com/public/xl-cli/24.3.2/) - [Installation instructions](https://docs.digital.ai/release/docs/xl-platform/operator/xl-kube)
+- [xl-cli 25.3.0](https://dist.xebialabs.com/public/xl-cli/25.3.0/) - [Installation instructions](https://docs.digital.ai/release/docs/xl-platform/operator/xl-kube)
 - [yq](https://github.com/mikefarah/yq) 4.18.1 or higher. Ubuntu comes with a broken version of yq installed. Download the latest version of yq from GitHub directly.
 
 ### Mandatory for Azure
@@ -41,16 +41,16 @@ if you have any questions or troubles, contact your Digital.ai representative
 
 ### [Part 1](./part-1/lab-1-install-release.md)
 
-1. [Install Digital.ai Release 24.3.2](./part-1/lab-1-install-release.md)
+1. [Install Digital.ai Release 25.3.0](./part-1/lab-1-install-release.md)
    - Wait for resources with `xl kube check`
    - Discover how to open the page and login
-2. [Upgrade Release 24.3.2](./part-1/lab-2-upgrade-release.md)
+2. [Upgrade Release 25.3.0](./part-1/lab-2-upgrade-release.md)
 3. [OIDC setup (use Identity service)](./part-1/lab-3-oidc-setup.md)
 4. [Clean Release from cluster](./part-1/lab-4-clean-release.md)
 
 ### [Part 2](./part-2/lab-5-install-deploy.md)
 
-5. [Install Deploy with –files 24.3.2](./part-2/lab-5-install-deploy.md)
+5. [Install Deploy with –files 25.3.](./part-2/lab-5-install-deploy.md)
    - Use private image registry for all images
    - Discover how to open the page and login
 6. [Clean Deploy from cluster](./part-2/lab-6-clean-deploy.md)

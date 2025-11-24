@@ -1,7 +1,7 @@
 
-# Lab 2 - Upgrade Release to 24.3.3
+# Lab 2 - Upgrade Release to 25.3.x
 
-In this lab we will upgrade the previous installation to Digital.ai Release 24.3.3.
+In this lab we will upgrade the previous installation to Digital.ai Release 25.3.x.
 
 Just start upgrade process by running:
 
@@ -38,10 +38,10 @@ $ xl kube upgrade --skip-prompts
 ? Select type of image registry: default [Default (Uses various public image registries for the installation images)]
 ? Enter the repository name for the application and operator images (eg: <repositoryName> from <repositoryName>/<imageName>:<tagName>): xebialabsunsupported
 ? Enter the Release image name (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): xl-release
-⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.3
+⚠️? Enter the application image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 25.3.x
 ? Type of the OIDC configuration: no-oidc [No OIDC Configuration]
 ? Enter the operator image to use (eg: <imageName> from <repositoryName>/<imageName>:<tagName>): release-operator
-⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 24.3.3
+⚠️? Enter the operator image tag (eg: <tagName> from <repositoryName>/<imageName>:<tagName>): 25.3.x
 ? Enter the name of custom resource definition you want to reuse or replace: digitalaireleases.xlr.digital.ai
 ⚠️? Should CRD be reused, if No we will delete the CRD digitalaireleases.xlr.digital.ai, and all related CRs will be deleted with it: Yes
 ? Enter the name of custom resource: dai-xlr-ns-yourname
@@ -60,7 +60,7 @@ $ xl kube upgrade --skip-prompts
 	| GenerationDateTime             | 20240108-114406                                    |
 	| ImageNameRelease               | xl-release                                         |
 	| ImageRegistryType              | default                                            |
-	| ImageTag                       | 24.3.3                                             |
+	| ImageTag                       | 25.3.x                                             |
 	| IngressType                    | nginx                                              |
 	| IngressTypeGeneric             | nginx                                              |
 	| IngressTypeOpenshift           | route                                              |
@@ -72,7 +72,7 @@ $ xl kube upgrade --skip-prompts
 	| OidcConfigType                 | no-oidc                                            |
 	| OidcConfigTypeUpgrade          | no-oidc                                            |
 	| OperatorImageRelease           | release-operator                                   |
-	| OperatorImageTag               | 24.3.3                                             |
+	| OperatorImageTag               | 25.3.0                                             |
 	| OsType                         | darwin                                             |
 	| PreserveCrValuesRelease        | .metadata.name: .\n.spec.persistence.storageClas.. |
 	| PreservePvc                    | true                                               |
@@ -91,7 +91,7 @@ $ xl kube upgrade --skip-prompts
 For current process files will be generated in the: digitalai/dai-release/ns-yourname/20240108-111630/kubernetes
 Generated answers file successfully: digitalai/generated_answers_dai-release_ns-yourname_upgrade-20240108-111630.yaml 
 Starting upgrade processing
-Fetching values from cluster... -Upgrading from old version 24.3.2
+Fetching values from cluster... -Upgrading from old version 25.3.0
 Generated files successfully for operatorToOperator upgrade for PlainK8s.
 CRD creation will be skipped, expecting to have CRD already on cluster
 Cleaning the resources on the cluster!
@@ -140,7 +140,7 @@ Use the following command to wait for the upgrade to be complete:
 xl kube check --skip-collecting --skip-prompts --wait-for-ready 5
 ```
 
-When done, reload Release in the browser and check the version number again. It should now be **Version 24.3.3**
+When done, reload Release in the browser and check the version number again. It should now be **Version 25.3.0**
 
 Note: Minikube service ports are changed, check the service ports again to see which you need to use in the Release URL.
 
